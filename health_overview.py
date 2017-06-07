@@ -8,9 +8,8 @@ app = Flask(__name__)
 
 MONGODB_HOST = 'localhost'
 MONGODB_PORT = 27017
-DBS_NAME = 'fitbitData'
-COLLECTION_NAME = 'activityMay', 'heartRateMay', 'sleepDataMay'  # is this correct to have more than one collection
-                                                                 #  or do they need to be combined.
+DBS_NAME = 'fitbit'
+COLLECTION_NAME = 'activity'
 
 
 
@@ -21,7 +20,7 @@ def index():
     """
     return render_template("index.html")
 
-@app.route("/fitbitData/") # No sure what I should put after the second / as I have 3 collections
+@app.route("/fitbit/activity")
 def health_overview():
     """
     A Flask view to serve the project data from
@@ -31,19 +30,23 @@ def health_overview():
     # A constant that define the record fields that we wish to retrieve
     FIELDS = {
         "_id": False,
-        "Activities": True,
-        "CALORIES": True,
-        "STEPS": True,
-        "DISTANCE": True,
-        "FLOORS": True,
-        "ACTIVITY CALORIES": True
+        "date": True,
+        "calories_burned": True,
+        "steps": True,
+        "distance": True,
+        "floors": True,
+        "minutes_sedentary": True,
+        "minutes_lightly_active": True,
+        "minutes_fairly_active": True,
+        "minutes_very_active": True,
+        "activity_calories": True
     }
 
     # Open a connection to MongoDB using a with statement such that the
     # connection will be closed as soon as we exit the with statement
     with MongoClient(MONGODB_HOST, MONGODB_PORT) as conn:
         # Define which collection we wish to access
-        collection = conn['fitbitData']['']   # again not sure what I would need to put here.
+        collection = conn['fitbit']['activity']   # again not sure what I would need to put here.
         # Retrieve a result set only with the fields defined in FIELDS
         # and limit the the results to 55000
         projects = collection.find(projection=FIELDS, limit=55000)
