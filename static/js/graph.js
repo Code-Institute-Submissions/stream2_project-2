@@ -11,7 +11,7 @@ function makeGraphs(error, activityJson) {
       d["date"] = dateFormat.parse(d["date"]);
       d["calories_burned"] = +d["calories_burned"];
       d["steps"] = +d["steps"];
-      d["distance"] = +d["distance"]; // unsure aboout distance km?
+      d["distance"] = +d["distance"]; // unsure about distance km?
       d["floors"] = +d["floors"];
       // d["minutes_sedentary"] = +d["minutes_sedentary"];
       d["minutes_lightly_active"] = +d["minutes_lightly_active"];
@@ -55,7 +55,7 @@ function makeGraphs(error, activityJson) {
 
 
     // Define Data Groups, Calculate Metrics
-    var numRecordsByDate = dateDim.group();
+
     var caloriesGroup = caloriesDim.group();
     var stepsGroup = stepsDim.group();
     var distanceGroup = distanceDim.group();
@@ -73,7 +73,7 @@ function makeGraphs(error, activityJson) {
     var maxDate = dateDim.top(1)[0]["date"];
 
     //Charts
-    var timeChart = dc.barChart("#time-chart");
+
     var caloriesChart = dc.barChart("#calories-burned-chart");
     var stepsChart = dc.barChart("#steps-chart");
     var distanceND = dc.numberDisplay("#distance-chart");
