@@ -22,6 +22,27 @@ html, body {
     background-color: black;
 }
 
+.glyphicon{
+    color: white;
+    font-size:1.5em;
+}
+
+.nav-effect{
+    margin:auto;
+}
+
+.nav-effect a span {
+    color: #fff;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.nav-effect a span:hover::before,
+.nav-effect a span:focus::before {
+    color:#bcff25;
+}
+
 /*==================== 
      CHART STYLING 
 ======================*/
@@ -39,7 +60,7 @@ html, body {
 }
 
 .bar:hover {
-  fill: #58BEE8;
+  fill: #bcff25;
 }
 
 .x.axis path {
@@ -55,13 +76,13 @@ html, body {
     line-height: 0.75;
      position: relative;
     line-height: 1;
-    color:#58BEE8;
+    color:#000;
     display: inline-block;
 }
 
 
 .chart-title.charts:hover {
-    color: #ffa500;;
+    color: #000;
 }
 
 .chart-title.charts::after {
@@ -72,7 +93,7 @@ html, body {
     top: 50%;
     margin-top: -8px;
     right: 0;
-    background: #F9F9F9;
+    background: #bcff25;
     -webkit-transform: translate3d(-100%,0,0);
     transform: translate3d(-100%,0,0);
     -webkit-transition: -webkit-transform 0.4s;
@@ -91,7 +112,7 @@ html, body {
     position: absolute;
     z-index: 2;
     overflow: hidden;
-    color: #424242;
+    color: #bcff25;
     white-space: nowrap;
     width: 0%;
     -webkit-transition: width 0.4s 0.3s;
@@ -109,17 +130,20 @@ html, body {
 	border-radius: 50px;
 	border: 3px solid #fff;
 	color: #fff;
+    background-color: #000;
 	overflow: hidden;
     margin-top:10px;
 }
 
 .intro_button:active {
-	border-color: #33CC99;
-	color: #00bcd4;
+	border-color: #fff;
+	color: #bcff25;
 }
 
 .intro_button:hover {
-	background: #33CC99;
+	background: #bcff25;
+    border-color:#000;
+    color:#000;
 }
 
 .intro_button:before {
@@ -134,7 +158,7 @@ html, body {
 }
 
 .intro_button:active:before {
-	color: #33CC99;
+	color: #bcff25;
 }
 
 
