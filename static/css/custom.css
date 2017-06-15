@@ -56,11 +56,12 @@ html, body {
 }
 
 .bar {
-  fill: orange;
+  fill: #bcff25;
+  
 }
 
 .bar:hover {
-  fill: #bcff25;
+  fill: #000;
 }
 
 .x.axis path {
