@@ -89,7 +89,7 @@ function makeGraphs(error, activityJson) {
 
    
     var width = 700, height =300;
-    var margin = {top: 30, right: 50, bottom: 25, left: 40};
+    var margin = {top: 30, right: 50, bottom: 25, left: 30};
    
 
    //Charts
