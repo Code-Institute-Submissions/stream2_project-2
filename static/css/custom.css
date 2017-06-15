@@ -13,6 +13,15 @@ html, body {
     overflow-x: hidden;
 }
 
+
+/*==================== 
+       NAV BAR 
+======================*/
+
+#navbarBG {
+    background-color: black;
+}
+
 /*==================== 
      CHART STYLING 
 ======================*/
@@ -136,7 +145,7 @@ html, body {
     position: relative;
     font-size: 2.5em;
     line-height: 1;
-    color: #9e9ba4;
+    color: white;
     display: inline-block;
 }
 
@@ -147,15 +156,16 @@ html, body {
     font-weight: 900;
     overflow: hidden;
     line-height: 0.75;
-    color: #c5c2b8;
+    color: #fff ;
     font-family: "Helvetica";
 }
 
 .web-title:hover {
-    color: #c5c2b8;
+    color:#fff;
 }
 
 .web-title::after {
+    overflow:hidden;
     content: '';
     position: absolute;
     height: 16px;
@@ -163,7 +173,7 @@ html, body {
     top: 50%;
     margin-top: -8px;
     right: 0;
-    background: #F9F9F9;
+    background:#bcff25;
     -webkit-transform: translate3d(-100%,0,0);
     transform: translate3d(-100%,0,0);
     -webkit-transition: -webkit-transform 0.4s;
@@ -182,7 +192,7 @@ html, body {
     position: absolute;
     z-index: 2;
     overflow: hidden;
-    color: #424242;
+    color: #000;
     white-space: nowrap;
     width: 0%;
     -webkit-transition: width 0.4s 0.3s;
@@ -192,6 +202,10 @@ html, body {
 .web-title:hover::before {
     width: 100%;
 }
+
+
+
+
 
 
 
