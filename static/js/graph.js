@@ -6,7 +6,7 @@ function makeGraphs(error, activityJson) {
 
     //Clean projectsJson data
     var fitbitActivity = activityJson;
-    var dateFormat = d3.time.format("%Y-%m-%d");
+    var dateFormat = d3.time.format("%d-%m-%Y");
     fitbitActivity.forEach(function (d) {
       d["date"] = dateFormat.parse(d["date"]);
       d["calories_burned"] = +d["calories_burned"];
@@ -18,10 +18,10 @@ function makeGraphs(error, activityJson) {
       //d["minutes_fairly_active"] = +d["minutes_fairly_active"];
       d["minutes_very_active"] = +d["minutes_very_active"];
       d["activity_calories"] = +d["activity_calories"];
-
+      d.value = +[d.value];
     });
 
-
+  
 
     //Create a Crossfilter instance
     var ndx = crossfilter(fitbitActivity);
@@ -56,10 +56,18 @@ function makeGraphs(error, activityJson) {
 
     // Define Data Groups, Calculate Metrics
 
-    var caloriesGroup = caloriesDim.group();
-    var stepsGroup = stepsDim.group();
-    var distanceGroup = distanceDim.group();
-    var floorsGroup = floorsDim.group();
+    var caloriesGroup = dateDim.group().reduceSum(function (d){
+      return d.calories_burned;
+    });
+    var numberOfStepsTaken = stepsDim.group().reduceSum(function (d){
+      return d.steps;
+    });
+    var distanceTravelled = distanceDim.group().reduceSum(function (d){
+      return d.distance;
+    });
+    var floorsGroup = floorsDim.group().reduceSum(function (d){
+      return d.floors;
+    });
     //var minsSedentaryGroup = minsSedentaryDim.group();
     var minsLightlyActiveGroup = minsLightlyActiveDim.group();
     //var minsFairlyActiveGroup = minsFairlyActiveDim.group();
@@ -68,20 +76,94 @@ function makeGraphs(error, activityJson) {
     var all = ndx.groupAll();
 
 
-    //Define values (to be used in charts)
+    //Define values (to be used in charts) 
     var minDate = dateDim.bottom(1)[0]["date"];
     var maxDate = dateDim.top(1)[0]["date"];
 
     //Charts
 
     var caloriesChart = dc.barChart("#calories-burned-chart");
-    var stepsChart = dc.barChart("#steps-chart");
-    var distanceND = dc.numberDisplay("#distance-chart");
-    var floorsND = dc.numberDisplay("#floors-chart");
+    var stepsChart = dc.lineChart("#steps-chart");
+    var distanceChart = dc.barChart("#distance-chart");
+    var floorChart = dc.barChart("#floor-chart");
 
+   
+    var width = 700, height =300;
+    var margin = {top: 30, right: 50, bottom: 25, left: 40};
+   
 
-   //Chart Parameters
+   //Charts
+   caloriesChart
+       .width(width)
+       .height(height)
+       .margins(margin)
+       .dimension(caloriesDim)
+       .group(caloriesGroup)
+       .transitionDuration(5000)
+       .brushOn(false)
+       .title(function(d){return d.value + " kcal";})
+       .x(d3.time.scale().domain([minDate, maxDate]))
+       .xUnits(d3.time.days)
+       .elasticY(true)
+       .elasticX(true)
+       .xAxisLabel("May")
+       .yAxisLabel("Calories Burned Per Day")
+       .yAxis().ticks(6);
+  
+    stepsChart
+       .width(width)
+       .height(height)
+       .margins(margin)
+       .dimension(stepsDim)
+       .group(numberOfStepsTaken)
+       .transitionDuration(5000)
+       .brushOn(false)
+       .title(function(d){return d.value;})
+       .x(d3.time.scale().domain([minDate, maxDate]))
+       .xUnits(d3.time.days)
+       .elasticY(true)
+       .elasticX(true)
+       .xAxisLabel("May")
+       .yAxisLabel("Steps Per Day")
+       .yAxis().ticks(6);
+       
+       
+    distanceChart
+       .width(width)
+       .height(height)
+       .margins(margin)
+       .dimension(distanceDim)
+       .group(distanceTravelled)
+       .transitionDuration(5000)
+       .brushOn(false)
+       .title(function(d){return d.value + " km";})
+       .x(d3.time.scale().domain([minDate, maxDate]))
+       .xUnits(d3.time.days)
+       .elasticY(true)
+       .elasticX(true)
+       .xAxisLabel("May")
+       .yAxisLabel("Distance Travelled Per Day")
+       .yAxis().ticks(6);
 
+   floorChart
+       .width(width)
+       .height(height)
+       .margins(margin)
+       .dimension(floorsDim)
+       .group(floorsGroup)
+       .transitionDuration(5000)
+       .brushOn(false)
+       .title(function(d){return d.value;})
+       .x(d3.time.scale().domain([minDate, maxDate]))
+       .xUnits(d3.time.days)
+       .elasticY(true)
+       .elasticX(true)
+       .xAxisLabel("May")
+       .yAxisLabel("Floors Climbed Per Day")
+       .yAxis().ticks(6);
 
     dc.renderAll();
 }
+
+
+
