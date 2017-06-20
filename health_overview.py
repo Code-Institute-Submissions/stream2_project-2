@@ -53,5 +53,15 @@ def health_overview():
         # Convert projects to a list in a JSON object and return the JSON data
         return json.dumps(list(projects))
 
+@app.route("/heart_rate")
+def heart_rate():
+    return render_template("/heart_rate.html")
+
+
+@app.route("/sleep")
+def sleep():
+    return render_template("/sleep.html")
+
+
 if __name__ == '__main__':
     app.run(debug=True)

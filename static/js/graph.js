@@ -75,7 +75,6 @@ function makeGraphs(error, activityJson) {
     var activityCaloriesGroup = activityCaloriesDim.group();
     var all = ndx.groupAll();
 
-
     //Define values (to be used in charts) 
     var minDate = dateDim.bottom(1)[0]["date"];
     var maxDate = dateDim.top(1)[0]["date"];
@@ -90,14 +89,15 @@ function makeGraphs(error, activityJson) {
    
     var width = 700, height =300;
     var margin = {top: 30, right: 50, bottom: 25, left: 30};
-   
+  
+    console.log(dateDim.top(10));
 
    //Charts
    caloriesChart
        .width(width)
        .height(height)
        .margins(margin)
-       .dimension(caloriesDim)
+       .dimension(dateDim)
        .group(caloriesGroup)
        .transitionDuration(5000)
        .brushOn(false)
@@ -114,7 +114,7 @@ function makeGraphs(error, activityJson) {
        .width(width)
        .height(height)
        .margins(margin)
-       .dimension(stepsDim)
+       .dimension(dateDim)
        .group(numberOfStepsTaken)
        .transitionDuration(5000)
        .brushOn(false)
@@ -132,7 +132,7 @@ function makeGraphs(error, activityJson) {
        .width(width)
        .height(height)
        .margins(margin)
-       .dimension(distanceDim)
+       .dimension(dateDim)
        .group(distanceTravelled)
        .transitionDuration(5000)
        .brushOn(false)
