@@ -14,8 +14,8 @@ app = Flask(__name__)
 
 MONGO_URI = os.getenv('mongodb://root:health_overview1@ds131492.mlab.com:31492/heroku_0dl950d9',
                       'mongodb://localhost:27017')
-DBS_NAME = os.getenv('heroku_0dl950d9','fitbit')
-COLLECTION_NAME = 'fitbit'
+DBS_NAME = os.getenv('heroku_0dl950d9', 'fitbit')
+COLLECTION_NAME = 'activity'
 
 
 
