@@ -42,7 +42,7 @@ def health_overview():
         "activity_calories": True
     }
 
-    #print(MONGO_URI)
+    print(MONGO_DB_URI, MONGO_DB_NAME, MONGO_DB_COLLECTION)
 
     # Open a connection to MongoDB using a with statement such that the
     # connection will be closed as soon as we exit the with statement
