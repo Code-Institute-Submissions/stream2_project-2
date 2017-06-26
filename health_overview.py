@@ -12,10 +12,9 @@ app = Flask(__name__)
 # DBS_NAME = 'fitbit'
 # COLLECTION_NAME = 'activity'
 
-MONGO_URI = os.getenv('mongodb://root:health_overview1@ds131492.mlab.com:31492/heroku_0dl950d9',
-                      'mongodb://localhost:27017')
-DBS_NAME = os.getenv('heroku_0dl950d9', 'fitbit')
-COLLECTION_NAME = 'activity'
+MONGO_URI = os.getenv('MONGO_URI', 'mongodb://root:health_overview1@ds131492.mlab.com:31492/heroku_0dl950d9')
+DBS_NAME = os.getenv('DBS_NAME', 'heroku_0dl950d9')
+COLLECTION_NAME = 'fitbit'
 
 
 
@@ -47,6 +46,8 @@ def health_overview():
         "minutes_very_active": True,
         "activity_calories": True
     }
+
+    #print(MONGO_URI)
 
     # Open a connection to MongoDB using a with statement such that the
     # connection will be closed as soon as we exit the with statement
