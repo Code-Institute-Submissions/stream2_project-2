@@ -13,26 +13,24 @@
 
 </head>
 <body class="application">
-    <div class="navbar navbar-inverse navbar-fixed-top"  role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
 
-        <div class="container-fluid nav-container" id="navbarBG">
+        <div class="container-fluid" id="navbarBG">
 
-<a class="link web-title navbar-brand" href="./">Maisie's Health Data<span data-letters="Maisie's Health Data"></span><span data-letters="Maisie's Health Data"></span></a>
-                <button class="intro_button" type="button" autofocus onclick="introJs().start();">Start Tour!</button>
+                <div class="navbar-header">
+                <a class="link web-title navbar-brand" href="./">Maisie's Health Data<span data-letters="Maisie's Health Data"></span><span data-letters="Maisie's Health Data"></span></a>
+                                <button class="intro_button" type="button" autofocus onclick="introJs().start();">Start Tour!</button>
+                </div>
 
-
-            <div class="navbar-right">
+            
                 <ul class="nav navbar-nav navbar-right nav-effect" id="navigation">
-				<li><a href="{{ url_for('index') }}"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li><a href="{{ url_for('heart_rate') }}"><span class="glyphicon glyphicon-heart"></span></a></li>
-                <li><a href="{{ url_for('sleep') }}"><span class="glyphicon glyphicon-bed"></span></a></li>
-			    </ul>
-            </div>
+                    <li><a href="{{ url_for('index') }}"><span class="glyphicon glyphicon-home"></span></a></li>
+                    <li><a href="{{ url_for('heart_rate') }}"><span class="glyphicon glyphicon-heart"></span></a></li>
+                    <li><a href="{{ url_for('sleep') }}"><span class="glyphicon glyphicon-bed"></span></a></li>
+                </ul>
+
         </div>
-    </div>
-
-
-
+    </nav>
 
     <div id="outer" class="container-fluid">
 

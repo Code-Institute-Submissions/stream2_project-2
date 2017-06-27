@@ -29,7 +29,9 @@ html, body {
 
 .nav-effect{
     margin:auto;
-}
+    list-style-type: none;
+ }
+
 
 .nav-effect a span {
     color: #fff;
@@ -43,6 +45,9 @@ html, body {
     color:#bcff25;
 }
 
+#wrapper {
+   margin: 0;
+}
 /*==================== 
      CHART STYLING 
 ======================*/
@@ -231,6 +236,25 @@ html, body {
 
 
 
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+  .nav {
+    width:100%;
+  }
+
+  .glyphicon {
+    width:100%;
+    float:none;
+    color: white;
+  }
+
+ 
+
+  .nav-list {
+    list-style-type: none;
+  }
+
+  .web-title{height: inherit;}
+}
 
 
 
