@@ -45,9 +45,7 @@ html, body {
     color:#bcff25;
 }
 
-#wrapper {
-   margin: 0;
-}
+
 /*==================== 
      CHART STYLING 
 ======================*/
@@ -247,14 +245,7 @@ html, body {
     color: white;
   }
 
- 
-
-  .nav-list {
-    list-style-type: none;
-  }
-
   .web-title{height: inherit;}
 }
-
 
 
