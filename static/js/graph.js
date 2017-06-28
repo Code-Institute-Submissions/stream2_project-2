@@ -97,8 +97,11 @@ function makeGraphs(error, activityJson) {
     var x = d3.time.scale().range([0, width]);
     var y = d3.scale.linear().range([height, 0]);
 
-    var xAxis = d3.svg.axis().scale(x)
-        .orient("bottom").ticks(5);
+    var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("bottom")
+                .tickSize(6.0)
+                .tickFormat(d3.time.format("%d"));
     var yAxis = d3.svg.axis().scale(y)
         .orient("left").ticks(6);
 
@@ -114,16 +117,16 @@ function makeGraphs(error, activityJson) {
        .group(caloriesGroup)
        .transitionDuration(5000)
        .brushOn(false)
-       .title(function(d){return d.value + " kcal";})
+       .title(function(d){return d.value + " kcal" + d.date; })
        .x(d3.time.scale().domain([minDate, maxDate]))
-       //.xAxis().tickFormat(function(v) {return displayDate(v);})
        .xUnits(d3.time.days)
        .elasticY(true)
        .elasticX(true)
        .xAxisLabel("May")
        .yAxisLabel("Calories Burned Per Day")
-       .xAxis(xAxis)
-       .yAxis(yAxis);
+       .yAxis(yAxis)
+       .xAxis(xAxis);
+       
        
 
       
@@ -162,7 +165,9 @@ function makeGraphs(error, activityJson) {
        .elasticX(true)
        .xAxisLabel("May")
        .yAxisLabel("Distance Travelled Per Day")
-       .yAxis().ticks(6);
+       .yAxis(yAxis)
+       .xAxis(xAxis);
+       
 
    floorChart
        .width(width)
@@ -179,7 +184,9 @@ function makeGraphs(error, activityJson) {
        .elasticX(true)
        .xAxisLabel("May")
        .yAxisLabel("Floors Climbed Per Day")
-       .yAxis().ticks(6);
+       .yAxis(yAxis)
+       .xAxis(xAxis);
+       
 
     dc.renderAll();
 }
