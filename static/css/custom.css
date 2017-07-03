@@ -127,6 +127,20 @@ html, body {
     width: 100%;
 }
 
+#caloriesND{
+    font-size: 60px;
+    font-family: 'Helvetica';
+}
+
+#stepsND{
+    font-size: 60px;
+    font-family: 'Helvetica';
+}
+
+#distanceND{
+    font-size: 60px;
+    font-family: 'Helvetica';
+}
 
 /* ------- BUTTON STYLING ---------*/
 
