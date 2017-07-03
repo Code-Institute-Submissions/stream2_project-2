@@ -8,6 +8,7 @@ function makeGraphs(error, activityJson) {
     var fitbitActivity = activityJson;
     var dateFormat = d3.time.format("%d-%m-%Y");
     var displayDate = d3.time.format("%d %b");
+    var week = d3.time.format("%U");
     fitbitActivity.forEach(function (d) {
         d["date"] = dateFormat.parse(d["date"]);
         d["calories_burned"] = +d["calories_burned"];
@@ -72,15 +73,35 @@ function makeGraphs(error, activityJson) {
     var activityCaloriesGroup = activityCaloriesDim.group();
     var all = ndx.groupAll();
 
+    //var totalSteps  = dateDim.group().reduceSum(function(d) {
+    //  return d["steps"];
+    //});
+
     //Define values (to be used in charts)
     var minDate = dateDim.bottom(1)[0]["date"];
     var maxDate = dateDim.top(1)[0]["date"];
 
+    var totalCalories = ndx.groupAll().reduceSum(function (d) {
+       return d["calories_burned" ];
+   });
+
+    var totalSteps = ndx.groupAll().reduceSum(function (d) {
+       return d["steps"];
+   });
+
+    var totalDistance = ndx.groupAll().reduceSum(function (d) {
+       return d["distance"];
+   });
+
     //Charts
     var caloriesChart = dc.barChart("#calories-burned-chart");
+    var caloriesND = dc.numberDisplay("#caloriesND");
     var stepsChart = dc.barChart("#steps-chart");
+    var stepsND = dc.numberDisplay("#stepsND");
     var distanceChart = dc.barChart("#distance-chart");
+    var distanceND = dc.numberDisplay("#distanceND");
     var floorChart = dc.barChart("#floor-chart");
+    
 
     var margin = {top: 30, right: 50, bottom: 25, left: 30},
         width = 700 - margin.left - margin.right,
@@ -107,7 +128,7 @@ function makeGraphs(error, activityJson) {
        .group(caloriesGroup)
        .transitionDuration(5000)
        .brushOn(false)
-       .title(function(d){return d.value + " kcal" + d.date; })
+       .title(function(d){return d.value + " kcal";})
        .x(d3.time.scale().domain([minDate, maxDate]))
        .xUnits(d3.time.days)
        .elasticY(true)
@@ -116,6 +137,13 @@ function makeGraphs(error, activityJson) {
        .yAxisLabel("Calories Burned Per Day")
        .yAxis(yAxis)
        .xAxis(xAxis);
+
+    caloriesND
+      .formatNumber(d3.format("d"))
+      .valueAccessor(function (d){
+        return d;
+      })
+      .group(totalCalories);
 
     stepsChart
        .width(width)
@@ -135,6 +163,13 @@ function makeGraphs(error, activityJson) {
        .yAxis(yAxis)
        .xAxis(xAxis);
 
+    stepsND
+      .formatNumber(d3.format("d"))
+      .valueAccessor(function (d){
+        return d;
+      })
+      .group(totalSteps);
+
     distanceChart
        .width(width)
        .height(height)
@@ -153,6 +188,13 @@ function makeGraphs(error, activityJson) {
        .yAxis(yAxis)
        .xAxis(xAxis);
 
+    distanceND
+      .formatNumber(d3.format("d"))
+      .valueAccessor(function (d){
+        return d;
+      })
+      .group(totalDistance);
+
    floorChart
        .width(width)
        .height(height)
@@ -170,6 +212,8 @@ function makeGraphs(error, activityJson) {
        .yAxisLabel("Floors Climbed Per Day")
        .yAxis(yAxis)
        .xAxis(xAxis);
+
+  
 
     dc.renderAll();
 }
