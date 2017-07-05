@@ -9,7 +9,8 @@ app = Flask(__name__)
 
 MONGO_DB_URI = os.getenv('MONGO_DB_URI', 'mongodb://localhost:27017')
 MONGO_DB_NAME = os.getenv('MONGO_DB_NAME', 'fitbit')
-MONGO_DB_COLLECTION = os.getenv('MONGO_DB_COLLECTION', 'activity', 'heart_rate', 'sleep_data')
+MONGO_DB_COLLECTION = os.getenv('MONGO_DB_COLLECTION', 'activity') ## Not sure how this should be defined as 
+                                                                   ## there are three different collections for each page
 
 
 
@@ -61,7 +62,7 @@ def heart_rate():
     return render_template("/heart_rate.html")
 
 @app.route("/fitbit/heart_rate")
-def heart_rate():
+def heart_rate_db():
     
     """
     A Flask view to serve the project data from
@@ -92,7 +93,7 @@ def heart_rate():
         "peak_minutes": True
     }
 
-    print(MONGO_DB_URI, MONGO_DB_NAME, MONGO_DB_COLLECTION)
+    
 
     # Open a connection to MongoDB using a with statement such that the
     # connection will be closed as soon as we exit the with statement
@@ -113,7 +114,7 @@ def sleep():
     return render_template("/sleep.html")
 
 @app.route("/fitbit/sleep_data")
-def sleep():
+def sleep_db():
     
     """
     A Flask view to serve the project data from
@@ -133,8 +134,6 @@ def sleep():
         "minutes_after_wakeup": False,
         "efficiency": True
     }
-
-    print(MONGO_DB_URI, MONGO_DB_NAME, MONGO_DB_COLLECTION)
 
     # Open a connection to MongoDB using a with statement such that the
     # connection will be closed as soon as we exit the with statement
