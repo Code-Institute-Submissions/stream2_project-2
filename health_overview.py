@@ -61,15 +61,15 @@ def health_overview():
 def heart_rate():
     return render_template("/heart_rate.html")
 
-@app.route("/fitbit/heart_rate")
-def heart_rate_db():
+@app.route("/fitbit/heart_rate")  ## unsure if i need this or whether the code below 
+def heart_rate_db():             ## should just be embedded in the app route above
     
     """
     A Flask view to serve the project data from
     MongoDB in JSON format
     """
 
-    # A constant that define the record fields that we wish to retrieve
+    # A constant that defines the record fields that we wish to retrieve
     FIELDS = {
         "_id": False,
         "date": True,
@@ -113,7 +113,7 @@ def heart_rate_db():
 def sleep():
     return render_template("/sleep.html")
 
-@app.route("/fitbit/sleep_data")
+@app.route("/fitbit/sleep_data")  
 def sleep_db():
     
     """
