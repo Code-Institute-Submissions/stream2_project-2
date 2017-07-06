@@ -37,67 +37,36 @@
     <div id="outer" class="container-fluid">
 
         <div class="row">
-                <!-- Chart 1  -->
-                <div class="col-sm-6">
+                <!-- Average Resting Heart Rate  -->
+                <div class="col-sm-4">
                     <div class="chart-wrapper" data-step="1" data-intro="The description that you want"
                              style="font-weight: normal" data-position="right">
                         <div class="chart-title charts">
-                            CHART 1
+                            AVERAGE HEART RATE
                         </div>
                         <div class="chart-stage">
-                            <div id="chart-1"></div>
+                            <div id="average-resting-hr"></div>
                         </div>
                     </div>
                 </div>
-                <!-- Chart 1 -->
+                <!-- Average Resting Heart Rate  -->
 
 
-                <!-- Chart 2 -->
+                <!-- Heart Rate -->
                 <div class="col-sm-6">
                     <div class="chart-wrapper" data-step="2" data-intro="The description that you want"
                              style="font-weight: normal" data-position="right">
                         <div class="chart-title charts">
-                            CHART 2
+                            HEART RATE
                         </div>
                         <div class="chart-stage">
-                            <div id="chart-2"></div>
+                            <div id="heart-rate"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Chart 2 -->
+                <!-- Heart Rate -->
 
-
-
-        <!-- Chart 3 -->
-        <div class="col-sm-6">
-            <div class="chart-wrapper" data-step="3" data-intro="The description that you want"
-                             style="font-weight: normal" data-position="right">
-                <div class="chart-title charts">
-                   CHART 3
-                </div>
-                <div class="chart-stage">
-                    <div id="chart-3"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Chart 3 -->
-
-
-    <!-- Chart 4 -->
-        <div class="col-sm-6">
-            <div class="chart-wrapper" data-step="3" data-intro="The description that you want"
-                             style="font-weight: normal" data-position="right">
-                <div class="chart-title charts">
-                    CHART 4
-                </div>
-                <div class="chart-stage">
-                    <div id="chart-4"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Chart 4 -->
        </div>
     </div>
 
@@ -112,10 +81,10 @@
 <script src="{{ url_for ('static',filename='lib/js/d3.js') }}"></script>
 <script src="{{ url_for ('static',filename='lib/js/dc.js') }}"></script>
 <script src="{{ url_for ('static',filename='lib/js/queue.js') }}"></script>
-
-
+<script src="{{ url_for ('static',filename='js/heart_rate_graph.js') }}" type='text/javascript'></script>
 <script src="{{ url_for ('static',filename='lib/js/keen.min.js') }}"></script>
 <script src="{{ url_for ('static',filename='js/graph.js') }}" type='text/javascript'></script>
+
 <script src="{{ url_for ('static',filename='lib/js/intro.js') }}" type="text/javascript"></script>
 </body>
 </html>
