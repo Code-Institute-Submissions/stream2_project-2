@@ -37,8 +37,9 @@
     <div id="outer" class="container-fluid">
 
         <div class="row">
-                <!-- Average Resting Heart Rate  -->
-                <div class="col-sm-4">
+
+        <!-- Average Resting Heart Rate  -->
+                <div class="col-sm-3">
                     <div class="chart-wrapper" data-step="1" data-intro="The description that you want"
                              style="font-weight: normal" data-position="right">
                         <div class="chart-title charts">
@@ -54,30 +55,74 @@
                         </div>
                     </div>
                 </div>
-                <!-- Average Resting Heart Rate  -->
+        <!-- Average Resting Heart Rate  -->
 
 
-                <!-- Heart Rate -->
+        <!-- Max Heart Rate -->
                 <div class="col-sm-6">
                     <div class="chart-wrapper" data-step="2" data-intro="The description that you want"
                              style="font-weight: normal" data-position="right">
                         <div class="chart-title charts">
-                            HEART RATE
+                            MAX HEART RATE
                         </div>
                         <div class="chart-stage">
-                            <div id="heart-rate"></div>
+                            <div id="max-heart-rate"></div>
                         </div>
                     </div>
                 </div>
+        <!-- Max Heart Rate -->
 
-                <!-- Heart Rate -->
+         <!-- Heart Rate Zones-->
+                <div class="col-sm-3 chart-wrapper">
+                    <div class="chart-title charts">HEART RATE ZONES</div>
+                    <div>
+                   <h2>Peak</h2>
+                   <p>Peak zone, which means your heart rate is greater than 85% of maximum, is the high-intensity exercise zone. The peak zone is for short intense sessions that improve performance and speed.</p>
+
+                   <h2>Cardio</h2>
+                   <p>Cardio zone, which means your heart rate is 70 to 84% of maximum, is the medium-to-high intensity exercise zone. In this zone, you're pushing yourself but not straining. For most people, this is the exercise zone to target.</p>
+
+                   <h2>Fat Burn</h2>
+                   <p>Fat burn zone, which means your heart rate is 50 to 69% of maximum, is the low-to-medium intensity exercise zone. It’s called the fat burn zone because a higher percentage of calories are burned from fat, but the total calorie burn rate is lower.</p>
+                   </div>
+                </div>
+        <!-- Heart Rate Zones -->
+
+        <!-- Heart Rate Calories -->
+                <div class="col-sm-6">
+                    <div class="chart-wrapper" data-step="2" data-intro="The description that you want"
+                             style="font-weight: normal" data-position="right">
+                        <div class="chart-title charts">
+                            CALORIES BURNED IN HEART RATE ZONE
+                        </div>
+                        <div class="chart-stage">
+                            <div id="heart-rate-cals"></div>
+                        </div>
+                    </div>
+                </div>
+        <!-- Heart Rate Calories -->
+
+        <!-- Minutes In Heart Rate Zones -->
+                <div class="col-sm-6">
+                    <div class="chart-wrapper" data-step="2" data-intro="The description that you want"
+                             style="font-weight: normal" data-position="right">
+                        <div class="chart-title charts">
+                            MINUTES IN HEART RATE ZONES
+                        </div>
+                        <div class="chart-stage">
+                            <div id="mins-in-heart-rate"></div>
+                        </div>
+                    </div>
+                </div>
+        <!-- Heart Rate Calories -->
+
 
        </div>
     </div>
 
 
 <hr>
-<p class="small text-muted"> Data collected from Fitbit</p>
+<p class="small text-muted"> Data and Information collected from Fitbit</p>
 
 
 <script src="{{ url_for ('static',filename='lib/js/jquery.min.js') }}"></script>
