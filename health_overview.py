@@ -100,7 +100,7 @@ def heart_rate_db():             ## should just be embedded in the app route abo
     # The MONGO_URI connection is required when hosted using a remote mongo db.
     with MongoClient(MONGO_DB_URI) as conn:
         # Define which collection we wish to access
-        collection = conn[MONGO_DB_NAME][MONGO_DB_COLLECTION]
+        collection = conn[MONGO_DB_NAME]['heart_rate']
         # Retrieve a result set only with the fields defined in FIELDS
         # and limit the the results to a lower limit of 20000
         projects = collection.find(projection=FIELDS, limit=20000)
@@ -140,7 +140,7 @@ def sleep_db():
     # The MONGO_URI connection is required when hosted using a remote mongo db.
     with MongoClient(MONGO_DB_URI) as conn:
         # Define which collection we wish to access
-        collection = conn[MONGO_DB_NAME][MONGO_DB_COLLECTION]
+        collection = conn[MONGO_DB_NAME]['sleep_data']
         # Retrieve a result set only with the fields defined in FIELDS
         # and limit the the results to a lower limit of 20000
         projects = collection.find(projection=FIELDS, limit=20000)
