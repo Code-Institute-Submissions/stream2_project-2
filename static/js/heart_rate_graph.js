@@ -37,7 +37,7 @@ function makeGraphs(error, heart_rateJson) {
 
     //Define data dimensions
     var dateDim =ndx.dimension(function(d) {
-        return d3.time.day(d["date"]);
+        return d["date"];
     });
     var restingHRDim =ndx.dimension(function(d) {
         return d["resting_heart_rate"];
@@ -91,6 +91,7 @@ function makeGraphs(error, heart_rateJson) {
       function reduceAdd(p, v) {
         ++p.count;
         p.total += v.value;
+        p.avg = p.total/v.value;
         return p;
       }
       function reduceRemove(p, v) {
@@ -99,9 +100,12 @@ function makeGraphs(error, heart_rateJson) {
         return p;
       }
       function reduceInitial() {
-        return {count: 0, total: 0};
+        return {count: 0, total: 0, avg: 0};
       }
 
+    console.log('AVG');
+    console.log(restingHRDim.top(10));
+    console.log(restingHRAvg);
 
     var fatburMinHRGroup = dateDim.group().reduceSum(function (d){
         return d.fat_burn_min_heart_rate;
@@ -126,7 +130,7 @@ function makeGraphs(error, heart_rateJson) {
         return d.peak_max_heart_rate;
     });
 
-    var peakMingroup = dateDim.group()/reduceSum(function (d){
+    var peakMingroup = dateDim.group().reduceSum(function (d){
         return d.peak_minutes;
     });
 
@@ -147,7 +151,7 @@ function makeGraphs(error, heart_rateJson) {
     var heartRateChart = dc.lineChart("#heart-rate");
     
 
-    var margin = {top: 30, right: 50, bottom: 25, left: 30},
+    var margin = {top: 30, right: 170, bottom: 25, left: 30},
         width = 700 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
 
@@ -172,14 +176,17 @@ function makeGraphs(error, heart_rateJson) {
       })
       .group(restingHRAvg);
 
-   caloriesChart
-       .width(width)
+   heartRateChart 
+       .width(700)
        .height(height)
        .margins(margin)
        .dimension(dateDim)
-       .group(all)
+       .group(fatburMaxHRGroup, "Fat Burn Heart Rate")
+       .stack(cardioMaxHRGroup, "Cardio Heart Rate")
+       .stack(peakMaxHRGroup, "Peak Heart Rate")
        .transitionDuration(5000)
        .brushOn(false)
+       .renderArea(true)
        .title(function(d){return d.value + " bpm";})
        .x(d3.time.scale().domain([minDate, maxDate]))
        .xUnits(d3.time.days)
@@ -187,6 +194,11 @@ function makeGraphs(error, heart_rateJson) {
        .elasticX(true)
        .xAxisLabel("May")
        .yAxisLabel("Heart Rate")
+       .legend(dc.legend()
+          .x(550)
+          .y(-2)
+          .itemHeight(13)
+          .gap(5))
        .yAxis(yAxis)
        .xAxis(xAxis);
     
