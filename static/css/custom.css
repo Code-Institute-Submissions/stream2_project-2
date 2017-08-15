@@ -45,146 +45,6 @@ html, body {
     color:#bcff25;
 }
 
-
-/*==================== 
-     CHART STYLING 
-======================*/
-
-
-.axis path,
-.axis line {
-  fill: black;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.bar {
-  fill: #bcff25;
-  
-}
-
-.bar:hover {
-  fill: #000;
-}
-
-.x.axis path {
-  display: none;
-}
-
-
-.chart-title.charts{
-    font-family:"Helvetica";
-    font-size:2em;
-    font-weight:900;
-    overflow: hidden;
-    line-height: 0.75;
-     position: relative;
-    line-height: 1;
-    color:#000;
-    display: inline-block;
-}
-
-
-.chart-title.charts:hover {
-    color: #000;
-}
-
-.chart-title.charts::after {
-    content: '';
-    position: absolute;
-    height: 16px;
-    width: 100%;
-    top: 50%;
-    margin-top: -8px;
-    right: 0;
-    background: #bcff25;
-    -webkit-transform: translate3d(-100%,0,0);
-    transform: translate3d(-100%,0,0);
-    -webkit-transition: -webkit-transform 0.4s;
-    transition: transform 0.4s;
-    -webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-    transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-}
-
-.chart-title.charts:hover::after {
-    -webkit-transform: translate3d(100%,0,0);
-    transform: translate3d(100%,0,0);
-}
-
-.chart-title.charts::before {
-    content: attr(data-letters);
-    position: absolute;
-    z-index: 2;
-    overflow: hidden;
-    color: #bcff25;
-    white-space: nowrap;
-    width: 0%;
-    -webkit-transition: width 0.4s 0.3s;
-    transition: width 0.4s 0.3s;
-}
-
-.chart-title.charts:hover::before {
-    width: 100%;
-}
-
-#caloriesND{
-    font-size: 60px;
-    font-family: 'Helvetica';
-}
-
-#stepsND{
-    font-size: 60px;
-    font-family: 'Helvetica';
-}
-
-#distanceND{
-    font-size: 60px;
-    font-family: 'Helvetica';
-}
-
-#avgRestingHR_ND{
-    font-size: 60px;
-    font-family: 'Helvetica';
-}
-
-/* ------- BUTTON STYLING ---------*/
-
-.intro_button {
-	border-radius: 50px;
-	border: 3px solid #fff;
-	color: #fff;
-    background-color: #000;
-	overflow: hidden;
-    margin-top:10px;
-}
-
-.intro_button:active {
-	border-color: #fff;
-	color: #bcff25;
-}
-
-.intro_button:hover {
-	background: #bcff25;
-    border-color:#000;
-    color:#000;
-}
-
-.intro_button:before {
-	position: absolute;
-	height: 100%;
-	font-size: 125%;
-	line-height: 3.5;
-	color: #fff;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
-}
-
-.intro_button:active:before {
-	color: #bcff25;
-}
-
-
 /* ------- NAV BRAND STYLING -----*/
 .link {
     outline: none;
@@ -274,6 +134,180 @@ html, body {
 transform: scale(1, 1);
 }
 }
+
+
+/*==================== 
+     CHART STYLING 
+======================*/
+
+
+.axis path,
+.axis line {
+  fill: black;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: #bcff25;
+  
+}
+
+.bar:hover {
+  fill: #000;
+}
+
+.x.axis path {
+  display: none;
+}
+
+
+.chart-title.charts{
+    font-family:"Helvetica";
+    font-size:2em;
+    font-weight:900;
+    overflow: hidden;
+    line-height: 0.75;
+     position: relative;
+    line-height: 1;
+    color:#000;
+    display: inline-block;
+}
+
+
+.chart-title.charts:hover {
+    color: #000;
+}
+
+.chart-title.charts::after {
+    content: '';
+    position: absolute;
+    height: 16px;
+    width: 100%;
+    top: 50%;
+    margin-top: -8px;
+    right: 0;
+    background: #bcff25;
+    -webkit-transform: translate3d(-100%,0,0);
+    transform: translate3d(-100%,0,0);
+    -webkit-transition: -webkit-transform 0.4s;
+    transition: transform 0.4s;
+    -webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+    transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.chart-title.charts:hover::after {
+    -webkit-transform: translate3d(100%,0,0);
+    transform: translate3d(100%,0,0);
+}
+
+.chart-title.charts::before {
+    content: attr(data-letters);
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+    color: #bcff25;
+    white-space: nowrap;
+    width: 0%;
+    -webkit-transition: width 0.4s 0.3s;
+    transition: width 0.4s 0.3s;
+}
+
+.HRZones {
+    font-size: 20px;
+    font-family:Helvetica;
+}
+
+.HRZones-Header{
+    font-size: 35px;
+    text-transform:uppercase;
+    font-family:Helvetica;
+}
+
+.chart-title.charts:hover::before {
+    width: 100%;
+}
+
+#caloriesND{
+    font-size: 60px;
+    font-family: 'Helvetica';
+}
+
+#stepsND{
+    font-size: 60px;
+    font-family: 'Helvetica';
+}
+
+#distanceND{
+    font-size: 60px;
+    font-family: 'Helvetica';
+}
+
+#avgRestingHR_ND{
+    font-size: 60px;
+    font-family: 'Helvetica';
+}
+
+#average-resting-hr{
+    font-size: 60px;
+    font-family: 'Helvetica';
+}
+
+.number-display{
+    position: relative;
+    float: left;
+    left:60%;
+}
+
+.heart-icon{
+    position: relative;
+    float: left;
+    left: 15%
+}
+
+/*==================== 
+     BUTTON STYLING 
+======================*/
+
+.intro_button {
+	border-radius: 50px;
+	border: 3px solid #fff;
+	color: #fff;
+    background-color: #000;
+	overflow: hidden;
+    margin-top:10px;
+}
+
+.intro_button:active {
+	border-color: #fff;
+	color: #bcff25;
+}
+
+.intro_button:hover {
+	background: #bcff25;
+    border-color:#000;
+    color:#000;
+}
+
+.intro_button:before {
+	position: absolute;
+	height: 100%;
+	font-size: 125%;
+	line-height: 3.5;
+	color: #fff;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.intro_button:active:before {
+	color: #bcff25;
+}
+
+
+/*==================== 
+  HEART BEAT STYLING 
+======================*/
 
 .heart-icon {
     -webkit-animation: pulse 1s linear infinite;
