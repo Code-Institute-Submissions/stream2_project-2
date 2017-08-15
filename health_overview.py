@@ -7,10 +7,9 @@ import os
 app = Flask(__name__)
 
 
-MONGO_DB_URI = os.getenv('MONGO_DB_URI', 'mongodb://localhost:27017')
-MONGO_DB_NAME = os.getenv('MONGO_DB_NAME', 'fitbit')
-MONGO_DB_COLLECTION = os.getenv('MONGO_DB_COLLECTION', 'activity') ## Not sure how this should be defined as 
-                                                                   ## there are three different collections for each page
+MONGO_DB_URI = os.getenv('MONGO_DB_URI', 'mongodb://root:health_overview1@ds131492.mlab.com:31492/heroku_0dl950d9')
+MONGO_DB_NAME = os.getenv('MONGO_DB_NAME', 'heroku_0dl950d9')
+# MONGO_DB_COLLECTION = os.getenv('MONGO_DB_COLLECTION', 'activity')
 
 
 
