@@ -86,26 +86,56 @@ function makeGraphs(error, heart_rateJson) {
 
 
     // Define Data Groups, Calculate Metrics
-    var restingHRAvg = restingHRDim.group().reduce(reduceAdd, reduceRemove, reduceInitial);
-
-      function reduceAdd(p, v) {
+    
+    // A custom reduce function that takes all the values of our heart rate
+    // data set and counts up the total heart rate as well as the number of 
+    // heart rate data points. We use this later to get the average
+    var restingHRTotals = restingHRDim
+      .groupAll()
+      .reduce(
+    // This "reduceAdd" function is run on every object in your group
+    //  as well as when you add new data to the group.
+    //  
+    // P is the 'running total' object that you set up in the reduceInitial
+    // function, in other words it's the 'count', 'total' and 'avg' values
+    // 
+    // V is the actual row from the database, so a single data entry
+    // with your heart rate values for one day.
+      function(p, v) {
+        console.log(p, v);
         ++p.count;
-        p.total += v.value;
-        p.avg = p.total/v.value;
+        p.total += v.resting_heart_rate;
         return p;
-      }
-      function reduceRemove(p, v) {
+      },
+      // This is the "reduceRemove" function and is basically the reverse
+      // of the add function.
+      function(p, v) {
         --p.count;
-        p.total -= v.value;
+        p.total -= v.resting_heart_rate;
         return p;
-      }
-      function reduceInitial() {
-        return {count: 0, total: 0, avg: 0};
-      }
+      },
+      // This function is used only once, at the start of the reduce operation
+      // to define your initial state (your starting parameters). In this case
+      // we are creating an object with 3 values, but that's not required. We
+      // could just as easily return a single value if we were doing a less
+      // complicated operation. In this case we need all 3 values to be able
+      // to calculate our average
+      function(){
+        return {count:0, total:0};
+      });
 
-    console.log('AVG');
-    console.log(restingHRDim.top(10));
-    console.log(restingHRAvg);
+      // This function performs the actual averaging of the heart rate data
+      // after the reduce function is carried out.
+    var restingHRAVG = function(d) {
+      var avg = d.count ? d.total/d.count : 0;
+      console.log('AVG', avg);
+      return avg;
+    };
+
+
+
+
+
 
     var fatburMinHRGroup = dateDim.group().reduceSum(function (d){
         return d.fat_burn_min_heart_rate;
@@ -152,10 +182,6 @@ function makeGraphs(error, heart_rateJson) {
         return d.peak_minutes;
     });
 
-
-      console.log(fatburnMinsGroup);
-
-    
     var all = ndx.groupAll();
 
 
@@ -190,11 +216,9 @@ function makeGraphs(error, heart_rateJson) {
    //Charts
 
    avgRestingHR_ND
-      .formatNumber(d3.format("d"))
-      .valueAccessor(function (d){
-        return d;
-      })
-      .group(restingHRAvg);
+      .formatNumber(d3.format(".3g"))
+      .valueAccessor(restingHRAVG)
+      .group(restingHRTotals);
 
    maxHeartRateChart 
        .width(700)
