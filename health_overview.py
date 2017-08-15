@@ -42,14 +42,13 @@ def health_overview():
         "activity_calories": True
     }
 
-    print(MONGO_DB_URI, MONGO_DB_NAME, MONGO_DB_COLLECTION)
 
     # Open a connection to MongoDB using a with statement such that the
     # connection will be closed as soon as we exit the with statement
     # The MONGO_URI connection is required when hosted using a remote mongo db.
     with MongoClient(MONGO_DB_URI) as conn:
         # Define which collection we wish to access
-        collection = conn[MONGO_DB_NAME][MONGO_DB_COLLECTION]
+        collection = conn[MONGO_DB_NAME]['fitbit']
         # Retrieve a result set only with the fields defined in FIELDS
         # and limit the the results to a lower limit of 20000
         projects = collection.find(projection=FIELDS, limit=20000)
