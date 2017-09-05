@@ -1,117 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Maisie's Health Data</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Quicksand" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/keen-dashboards.css') }}">
-    <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/dc.css') }}">
-    <link rel="stylesheet" href="{{ url_for ('static',filename='css/custom.css') }}">
-    <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/introjs.css') }}">
-
-</head>
-<body class="application">
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-
-        <div class="container-fluid" id="navbarBG">
-
-                <div class="navbar-header">
-                <a class="link web-title navbar-brand" href="./">Maisie's Health Data<span data-letters="Maisie's Health Data"></span><span data-letters="Maisie's Health Data"></span></a>
-                                <div id="menu-select"></div>
-                </div>
-
-            
-                <ul class="nav navbar-nav navbar-right nav-effect" id="navigation">
-    				<li><a href="{{ url_for('index') }}"><span class="glyphicon glyphicon-home"></span></a></li>
-                    <li><a href="{{ url_for('heart_rate') }}"><span class="glyphicon glyphicon-heart"></span></a></li>
-			    </ul>
-
-        </div>
-    </nav>
-
-
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block content %}
 
     <div id="outer" class="container-fluid">
 
-        <div class="row">
-                <!-- Calories Burned Chart -->
+    <div class="row">
+        <div class="col-sm-12 chart-wrapper">
+                    <div class="chart-title charts">Welcome</div>
+                    <div>
+                   <p class="HRZones">Welcome to my Health Data page, here you can see data collected from my fitbit. You will find information from how many calories I've burnt, total steps I've taken and distance travelled. You can also find all my heart rate data on the next page. </p>
+                   </div>
+                </div>
+                
+        <!-- Calories Burned Chart -->
                 <div class="col-sm-8">
-                    <div class="chart-wrapper" data-step="1" data-intro="The description that you want"
-                             style="font-weight: normal" data-position="right">
+                    <div class="chart-wrapper">
                         <div class="chart-title charts">
-                            CALORIES BURNED
+                            Calories Burned
                         </div>
                         <div class="chart-stage">
                             <div id="calories-burned-chart"></div>
                         </div>
                     </div>
                 </div>
-                <!-- Calories Burned Chart -->
+        <!-- Calories Burned Chart -->
 
-                <!-- Calories ND -->
+        <!-- Calories ND -->
                 <div class="col-sm-4">
                     <div class="chart-wrapper" data-step="1" data-intro="The description that you want"
                              style="font-weight: normal" data-position="right">
                         <div class="chart-title charts">
-                            TOTAL CALORIES BURNED
+                            Total Calories Burned
                         </div>
                         <div class="chart-stage">
                             <div id="caloriesND"></div>
                         </div>
                     </div>
                 </div>
-        
-                <!-- Calories ND -->
+        <!-- Calories ND -->
             
-            
-                <!-- Steps Chart -->
+        <!-- Steps Chart -->
                 <div class="col-sm-8">
                     <div class="chart-wrapper" data-step="2" data-intro="The description that you want"
                              style="font-weight: normal" data-position="right">
                         <div class="chart-title charts">
-                            STEPS
+                            Steps
                         </div>
                         <div class="chart-stage">
                             <div id="steps-chart"></div>
                         </div>
                     </div>
                 </div>
-            
-                <!-- Steps Chart -->
+        <!-- Steps Chart -->
 
-                <!-- Steps ND -->
+        <!-- Steps ND -->
                 <div class="col-sm-4">
                     <div class="chart-wrapper" data-step="1" data-intro="The description that you want"
                              style="font-weight: normal" data-position="right">
                         <div class="chart-title charts">
-                            TOTAL STEPS
+                            Total Steps
                         </div>
                         <div class="chart-stage">
                             <div id="stepsND"></div>
                         </div>
                     </div>
                 </div>
-        
-                <!-- Steps ND -->
+        <!-- Steps ND -->
             
-        
 
         <!-- Distance Chart -->
         <div class="col-sm-8">
             <div class="chart-wrapper" data-step="3" data-intro="The description that you want"
                              style="font-weight: normal" data-position="right">
                 <div class="chart-title charts">
-                    DISTANCE CHART
+                    Distance
                 </div>
                 <div class="chart-stage">
                     <div id="distance-chart"></div>
                 </div>
             </div>
         </div>
-    
         <!-- Distance Chart -->
 
         <!-- Steps ND -->
@@ -119,23 +87,22 @@
                     <div class="chart-wrapper" data-step="1" data-intro="The description that you want"
                              style="font-weight: normal" data-position="right">
                         <div class="chart-title charts">
-                            TOTAL DISTANCE COVERED
+                            Total Distance Covered 
                         </div>
                         <div class="chart-stage">
                             <div id="distanceND"></div>
                         </div>
                     </div>
                 </div>
-        
-                <!-- Steps ND -->
+        <!-- Steps ND -->
 
     
-    <!-- Floor Chart -->
-        <div class="col-sm-6">
+        <!-- Floor Chart -->
+        <div class="col-sm-8">
             <div class="chart-wrapper" data-step="3" data-intro="The description that you want"
                              style="font-weight: normal" data-position="right">
                 <div class="chart-title charts">
-                    FLOORS CLIMBED
+                    Floors Climbed
                 </div>
                 <div class="chart-stage">
                     <div id="floor-chart"></div>
@@ -145,23 +112,5 @@
         <!-- Floor Chart -->
        </div>
     </div>
+{% endblock %}
 
-
-<hr>
-<p class="small text-muted"> Data and Information collected from Fitbit</p>
-
-
-<script src="{{ url_for ('static',filename='lib/js/jquery.min.js') }}"></script>
-<script src="{{ url_for ('static',filename='lib/js/bootstrap.min.js') }}"></script>
-<script src="{{ url_for ('static',filename='lib/js/crossfilter.js') }}"></script>
-<script src="{{ url_for ('static',filename='lib/js/d3.js') }}"></script>
-<script src="{{ url_for ('static',filename='lib/js/dc.js') }}"></script>
-<script src="{{ url_for ('static',filename='lib/js/queue.js') }}"></script>
-
-
-<script src="{{ url_for ('static',filename='lib/js/keen.min.js') }}"></script>
-<script src="{{ url_for ('static',filename='js/graph.js') }}" type='text/javascript'></script>
-<script src="{{ url_for ('static',filename='js/heart_rate_graph.js') }}" type='text/javascript'></script>
-<script src="{{ url_for ('static',filename='lib/js/intro.js') }}" type="text/javascript"></script>
-</body>
-</html>
