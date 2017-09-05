@@ -168,10 +168,11 @@ transform: scale(1, 1);
     font-weight:900;
     overflow: hidden;
     line-height: 0.75;
-     position: relative;
+    position: relative;
     line-height: 1;
     color:#000;
     display: inline-block;
+    text-transform: uppercase;
 }
 
 
@@ -304,17 +305,19 @@ transform: scale(1, 1);
 ======================*/
 
 .dc-select-menu {
-    background: #33CC99;
+    background: #fff;
     width: 80%;
     border: none;
     position: relative;
     height: 31px;
     font-size: 15px;
-    color: white;
+    color: #000;
     vertical-align: middle;
     text-align: center;
+    margin-top:11px;
     padding-top: 4px;
     padding-bottom: 0;
+    font-family:Helvetica;
 }
 
 /*==================== 
