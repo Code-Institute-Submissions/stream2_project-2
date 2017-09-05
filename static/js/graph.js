@@ -9,8 +9,10 @@ function makeGraphs(error, activityJson) {
     var dateFormat = d3.time.format("%d-%m-%Y");
     var displayDate = d3.time.format("%d %b");
     var week = d3.time.format("%U");
+    var monthNameFormat = d3.time.format("%b");
     fitbitActivity.forEach(function (d) {
         d["date"] = dateFormat.parse(d["date"]);
+        d.month = d3.time.month(d["date"]);
         d["calories_burned"] = +d["calories_burned"];
         d["steps"] = +d["steps"];
         d["distance"] = +d["distance"]; // unsure about distance km?
@@ -21,14 +23,24 @@ function makeGraphs(error, activityJson) {
         d["minutes_very_active"] = +d["minutes_very_active"];
         d["activity_calories"] = +d["activity_calories"];
         d.value = +[d.value];
+
     });
 
     //Create a Crossfilter instance
     var ndx = crossfilter(fitbitActivity);
 
+    
+    
+
     //Define data dimensions
     var dateDim =ndx.dimension(function(d) {
         return d3.time.day(d["date"]);
+    });
+
+    var monthDim=ndx.dimension(function(d) {
+        var month = d["date"].getMonth();
+        var months= [null, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return d.month;
     });
     var caloriesDim =ndx.dimension(function(d) {
         return d["calories_burned"];
@@ -65,6 +77,9 @@ function makeGraphs(error, activityJson) {
     var floorsGroup = dateDim.group().reduceSum(function (d){
         return d.floors;
     });
+    var monthGroup = monthDim.group();
+
+    
 
     //var minsSedentaryGroup = minsSedentaryDim.group();
     var minsLightlyActiveGroup = minsLightlyActiveDim.group();
@@ -119,6 +134,10 @@ function makeGraphs(error, activityJson) {
         .orient("left")
         .ticks(6);
 
+    selectField = dc.selectMenu('#menu-select')
+       .dimension(monthDim)
+       .group(monthGroup);
+
    //Charts
    caloriesChart
        .width(width)
@@ -149,16 +168,18 @@ function makeGraphs(error, activityJson) {
        .width(width)
        .height(height)
        .margins(margin)
-       .dimension(dateDim)
+       .dimension(monthDim)
        .group(numberOfStepsTaken)
        .transitionDuration(5000)
        .brushOn(false)
        .title(function(d){return d.value + " steps";})
-       .x(d3.time.scale().domain([minDate, maxDate]))
-       .xUnits(d3.time.days)
+       .x(d3.time.scale()).elasticX(true)
+       .round(d3.time.month.round)
+       .alwaysUseRounding(true)
+       .xUnits(d3.time.months)
        .elasticY(true)
        .elasticX(true)
-       .xAxisLabel("May")
+       .xAxisLabel("2017")
        .yAxisLabel("Steps Per Day")
        .yAxis(yAxis)
        .xAxis(xAxis);
