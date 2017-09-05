@@ -9,13 +9,11 @@ function makeGraphs(error, heart_rateJson) {
     var dateFormat = d3.time.format("%Y-%m-%d");
     var displayDate = d3.time.format("%d %b");
     var week = d3.time.format("%U");
+    var monthNameFormat = d3.time.format("%b");
     fitbit_heart_rate.forEach(function (d) {
         d["date"] = dateFormat.parse(d["date"]);
+        d.month = d3.time.month(d["date"]);
         d["resting_heart_rate"] = +d["resting_heart_rate"];
-       // d["normal_min_heart_rate"] = +d["normal_min_heart_rate"];
-      //  d["normal_max_heart_rate"] = +d["normal_max_heart_rate"];
-       // d["normal_calories_burned"] = +d["normal_calories_burned"];
-       // d["normal_minutes"] = +d["normal_minutes"];
         d["fat_burn_min_heart_rate"] = +d["fat_burn_min_heart_rate"];
         d["fat_burn_max_heart_rate"] = +d["fat_burn_max_heart_rate"];
         d["fat_burn_calories_burned"] = +d["fat_burn_calories_burned"];
@@ -38,6 +36,11 @@ function makeGraphs(error, heart_rateJson) {
     //Define data dimensions
     var dateDim =ndx.dimension(function(d) {
         return d["date"];
+    });
+    var monthDim=ndx.dimension(function(d) {
+        var month = d["date"].getMonth();
+        var months= [null, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return d.month;
     });
     var restingHRDim =ndx.dimension(function(d) {
         return d["resting_heart_rate"];
@@ -183,6 +186,7 @@ function makeGraphs(error, heart_rateJson) {
     });
 
     var all = ndx.groupAll();
+    var monthGroup = monthDim.group();
 
 
     //Define values (to be used in charts)
@@ -214,6 +218,8 @@ function makeGraphs(error, heart_rateJson) {
         .ticks(8);
 
    //Charts
+
+   
 
    avgRestingHR_ND
       .formatNumber(d3.format(".3g"))
