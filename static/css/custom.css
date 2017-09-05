@@ -251,23 +251,21 @@ transform: scale(1, 1);
 #average-resting-hr{
     font-size: 60px;
     font-family: 'Helvetica';
+    position:relative;
+    float:left;
+    left:30%;
 }
 
-.number-display{
-    position: relative;
-    float: left;
-    left:60%;
-}
 
 .heart-icon{
     position: relative;
-    float: left;
-    left: 15%
+    display: block;
+    margin: auto;
 }
 
 /*==================== 
      BUTTON STYLING 
-======================*/
+
 
 .intro_button {
 	border-radius: 50px;
@@ -303,7 +301,21 @@ transform: scale(1, 1);
 .intro_button:active:before {
 	color: #bcff25;
 }
+======================*/
 
+.dc-select-menu {
+    background: #33CC99;
+    width: 80%;
+    border: none;
+    position: relative;
+    height: 31px;
+    font-size: 15px;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 4px;
+    padding-bottom: 0;
+}
 
 /*==================== 
   HEART BEAT STYLING 
