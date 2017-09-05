@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} Maisie's Health Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/keen-dashboards.css') }}">
+    <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/dc.css') }}">
+    <link rel="stylesheet" href="{{ url_for ('static',filename='css/custom.css') }}">
+    <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/introjs.css') }}">
+    {% endblock %}
+</head>
+<body class="application">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="container-fluid" id="navbarBG">
+
+                <div class="navbar-header">
+                <a class="link web-title navbar-brand" href="./">Maisie's Health Data<span data-letters="Maisie's Health Data"></span><span data-letters="Maisie's Health Data"></span></a>
+                                <div id="menu-select"></div>
+                </div>
+
+            
+                <ul class="nav navbar-nav navbar-right nav-effect" id="navigation">
+    				<li><a href="{{ url_for('index') }}"><span class="glyphicon glyphicon-home"></span></a></li>
+                    <li><a href="{{ url_for('heart_rate') }}"><span class="glyphicon glyphicon-heart"></span></a></li>
+			    </ul>
+        </div>
+    </nav>
+
+
+<div id="outer" class="container-fluid">
+    {% block content %}
+    {% endblock %}
+
+</div>
+
+
+
+<hr>
+<div id=footer>
+{% block footer %}
+<p class="small text-muted"> Data and Information collected from Fitbit</p>
+{% endblock %}
+</div>
+
+<script src="{{ url_for ('static',filename='lib/js/jquery.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='lib/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='lib/js/crossfilter.js') }}"></script>
+<script src="{{ url_for ('static',filename='lib/js/d3.js') }}"></script>
+<script src="{{ url_for ('static',filename='lib/js/dc.js') }}"></script>
+<script src="{{ url_for ('static',filename='lib/js/queue.js') }}"></script>
+
+
+<script src="{{ url_for ('static',filename='lib/js/keen.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='js/graph.js') }}" type='text/javascript'></script>
+<script src="{{ url_for ('static',filename='js/heart_rate_graph.js') }}" type='text/javascript'></script>
+<script src="{{ url_for ('static',filename='lib/js/intro.js') }}" type="text/javascript"></script>
+</body>
+</html>
+
