@@ -6,14 +6,18 @@ function makeGraphs(error, heart_rateJson) {
 
     //Clean projectsJson data
     var fitbit_heart_rate = heart_rateJson;
-    var dateFormat = d3.time.format("%Y-%m-%d");
+    var dateFormat = d3.time.format("%d-%m-%Y");
     var displayDate = d3.time.format("%d %b");
     var week = d3.time.format("%U");
     var monthNameFormat = d3.time.format("%b");
     fitbit_heart_rate.forEach(function (d) {
         d["date"] = dateFormat.parse(d["date"]);
-        d.month = d3.time.month(d["date"]);
         d["resting_heart_rate"] = +d["resting_heart_rate"];
+        d.month = d3.time.month(d["date"]);
+       // d["normal_min_heart_rate"] = +d["normal_min_heart_rate"];
+      //  d["normal_max_heart_rate"] = +d["normal_max_heart_rate"];
+       // d["normal_calories_burned"] = +d["normal_calories_burned"];
+       // d["normal_minutes"] = +d["normal_minutes"];
         d["fat_burn_min_heart_rate"] = +d["fat_burn_min_heart_rate"];
         d["fat_burn_max_heart_rate"] = +d["fat_burn_max_heart_rate"];
         d["fat_burn_calories_burned"] = +d["fat_burn_calories_burned"];
@@ -185,8 +189,9 @@ function makeGraphs(error, heart_rateJson) {
         return d.peak_minutes;
     });
 
-    var all = ndx.groupAll();
     var monthGroup = monthDim.group();
+
+    var all = ndx.groupAll();
 
 
     //Define values (to be used in charts)
@@ -210,7 +215,7 @@ function makeGraphs(error, heart_rateJson) {
 
     var xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottom")
+        .orient("bottomß")
         .tickSize(6.0)
         .tickFormat(d3.time.format("%d"));
     var yAxis = d3.svg.axis().scale(y)
@@ -219,7 +224,9 @@ function makeGraphs(error, heart_rateJson) {
 
    //Charts
 
-   
+   selectField = dc.selectMenu('#menu-select')
+       .dimension(monthDim)
+       .group(monthGroup);
 
    avgRestingHR_ND
       .formatNumber(d3.format(".3g"))
@@ -231,9 +238,9 @@ function makeGraphs(error, heart_rateJson) {
        .height(height)
        .margins(margin)
        .dimension(dateDim)
-       .group(fatburMaxHRGroup, "Fat Burn")
-       .stack(cardioMaxHRGroup, "Cardio")
-       .stack(peakMaxHRGroup, "Peak")
+       .group(fatburMaxHRGroup, "Fat Burn Heart Rate")
+       .stack(cardioMaxHRGroup, "Cardio Heart Rate")
+       .stack(peakMaxHRGroup, "Peak Heart Rate")
        .transitionDuration(5000)
        .brushOn(false)
        .renderArea(true)
