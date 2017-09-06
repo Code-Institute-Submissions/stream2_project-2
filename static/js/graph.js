@@ -29,8 +29,6 @@ function makeGraphs(error, activityJson) {
     //Create a Crossfilter instance
     var ndx = crossfilter(fitbitActivity);
 
-    
-    
 
     //Define data dimensions
     var dateDim =ndx.dimension(function(d) {
@@ -79,23 +77,6 @@ function makeGraphs(error, activityJson) {
     });
     var monthGroup = monthDim.group();
 
-    
-
-    //var minsSedentaryGroup = minsSedentaryDim.group();
-    var minsLightlyActiveGroup = minsLightlyActiveDim.group();
-    //var minsFairlyActiveGroup = minsFairlyActiveDim.group();
-    var minsVeryActiveGroup = minsVeryActiveDim.group();
-    var activityCaloriesGroup = activityCaloriesDim.group();
-    var all = ndx.groupAll();
-
-    //var totalSteps  = dateDim.group().reduceSum(function(d) {
-    //  return d["steps"];
-    //});
-
-    //Define values (to be used in charts)
-    var minDate = dateDim.bottom(1)[0].date;
-    var maxDate = dateDim.top(1)[0].date;
-
     var totalCalories = ndx.groupAll().reduceSum(function (d) {
        return d.calories_burned;
    });
@@ -112,7 +93,22 @@ function makeGraphs(error, activityJson) {
       return d.floors;
     });
 
+    
 
+    //var minsSedentaryGroup = minsSedentaryDim.group();
+    var minsLightlyActiveGroup = minsLightlyActiveDim.group();
+    //var minsFairlyActiveGroup = minsFairlyActiveDim.group();
+    var minsVeryActiveGroup = minsVeryActiveDim.group();
+    var activityCaloriesGroup = activityCaloriesDim.group();
+    var all = ndx.groupAll();
+
+    
+
+    //Define values (to be used in charts)
+    var minDate = dateDim.bottom(1)[0].date;
+    var maxDate = dateDim.top(1)[0].date;
+
+    
 
     //Charts
     var caloriesChart = dc.barChart("#calories-burned-chart");
