@@ -11,25 +11,21 @@ function makeGraphs(error, heart_rateJson) {
     var week = d3.time.format("%U");
     var monthNameFormat = d3.time.format("%b");
     fitbit_heart_rate.forEach(function (d) {
-        d["date"] = dateFormat.parse(d["date"]);
-        d["resting_heart_rate"] = +d["resting_heart_rate"];
-        d.month = d3.time.month(d["date"]);
-       // d["normal_min_heart_rate"] = +d["normal_min_heart_rate"];
-      //  d["normal_max_heart_rate"] = +d["normal_max_heart_rate"];
-       // d["normal_calories_burned"] = +d["normal_calories_burned"];
-       // d["normal_minutes"] = +d["normal_minutes"];
-        d["fat_burn_min_heart_rate"] = +d["fat_burn_min_heart_rate"];
-        d["fat_burn_max_heart_rate"] = +d["fat_burn_max_heart_rate"];
-        d["fat_burn_calories_burned"] = +d["fat_burn_calories_burned"];
-        d["fat_burn_minutes"] = +d["fat_burn_minutes"];
-        d["cardio_min_heart_rate"] = +d["cardio_min_heart_rate"];
-        d["cardio_max_heart_rate"] = +d["cardio_max_heart_rate"];
-        d["cardio_calories_burned"] = +d["cardio_calories_burned"];
-        d["cardio_minutes"] = +d["cardio_minutes"];
-        d["peak_min_heart_rate"] = +d["peak_min_heart_rate"];
-        d["peak_max_heart_rate"] = +d["peak_max_heart_rate"];
-        d["peak_calories_burned"] = +d["peak_calories_burned"];
-        d["peak_minutes"] = +d["peak_minutes"];
+        d.date = dateFormat.parse(d.date);
+        d.month = d3.time.month(d.date);
+        d.resting_heart_rate = +d.resting_heart_rate;
+        d.fat_burn_min_heart_rate = +d.fat_burn_min_heart_rate;
+        d.fat_burn_max_heart_rate = +d.fat_burn_max_heart_rate;
+        d.fat_burn_calories_burned = +d.fat_burn_calories_burned ;
+        d.fat_burn_minutes = +d.fat_burn_minutes;
+        d.cardio_min_heart_rate = +d.cardio_min_heart_rate ;
+        d.cardio_max_heart_rate = +d.cardio_max_heart_rate;
+        d.cardio_calories_burned = + d.cardio_calories_burned;
+        d.cardio_minutes = +d.cardio_minutes;
+        d.peak_min_heart_rate = + d.peak_min_heart_rate ;
+        d.peak_max_heart_rate = +d.peak_max_heart_rate;
+        d.peak_calories_burned= +d.peak_calories_burned;
+        d.peak_minutes = +d.peak_minutes;
         // FILL OUT RELEVANT LINES
         d.value = +[d.value];
     });
@@ -39,54 +35,54 @@ function makeGraphs(error, heart_rateJson) {
 
     //Define data dimensions
     var dateDim =ndx.dimension(function(d) {
-        return d["date"];
+        return d.date;
     });
     var monthDim=ndx.dimension(function(d) {
-        var month = d["date"].getMonth();
+        var month = d.date.getMonth();
         var months= [null, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         return d.month;
     });
     var restingHRDim =ndx.dimension(function(d) {
-        return d["resting_heart_rate"];
+        return d.resting_heart_rate;
       });
 
     var fatburnMinHRDim =ndx.dimension(function(d) {
-        return d["fat_burn_min_heart_rate"];
+        return d.fat_burn_min_heart_rate;
         });
     var fatburnMaxHRDim =ndx.dimension(function(d) {
-        return d["fat_burn_max_heart_rate"];
+        return d.fat_burn_max_heart_rate;
         });
     var fatburnCalsDim =ndx.dimension(function(d) {
-        return d["fat_burn_calories_burned"];
+        return d.fat_burn_calories_burned;
         });
     var fatburnMinsDim =ndx.dimension(function(d) {
-        return d["fat_burn_minutes"];
+        return d.fat_burn_minutes;
         });
 
     var cardioMinHRDim =ndx.dimension(function(d) {
-        return d["cardio_min_heart_rate"];
+        return d.cardio_min_heart_rate;
         });
     var cardioMaxHRDim =ndx.dimension(function(d) {
-        return d["cardio_max_heart_rate"];
+        return d.cardio_max_heart_rate;
         });
     var cardioCalsDim =ndx.dimension(function(d) {
-        return d["cardio_calories_burned"];
+        return d.cardio_calories_burned;
         });
     var cardioMinsDim =ndx.dimension(function(d) {
-        return d["cardio_minutes"];
+        return d.cardio_minutes;
         });
 
     var peakMinHRDim =ndx.dimension(function(d) {
-        return d["peak_min_heart_rate"];
+        return d.peak_min_heart_rate;
         });
     var peakMaxHRDim =ndx.dimension(function(d) {
-        return d["peak_max_heart_rate"];
+        return d.peak_max_heart_rate;
         });
     var peakCalsDim =ndx.dimension(function(d) {
-        return d["peak_calories_burned"];
+        return d.peak_calories_burned;
         });
     var peakMinsDim =ndx.dimension(function(d) {
-        return d["peak_minutes"];
+        return d.peak_minutes;
         });
 
 
@@ -195,8 +191,8 @@ function makeGraphs(error, heart_rateJson) {
 
 
     //Define values (to be used in charts)
-    var minDate = dateDim.bottom(1)[0]["date"];
-    var maxDate = dateDim.top(1)[0]["date"];
+    var minDate = dateDim.bottom(1)[0].date;
+    var maxDate = dateDim.top(1)[0].date;
 
 
     //Charts
