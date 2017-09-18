@@ -354,6 +354,10 @@ transform: scale(1, 1);
         #outer{
             margin-top:55px
         }
+
+        .dc-select-menu{
+            margin:5px;
+        }
     
     @media screen and (min-width: 768px) {
         #menu {
