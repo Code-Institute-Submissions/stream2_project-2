@@ -13,6 +13,10 @@ html, body {
     overflow-x: hidden;
 }
 
+p, h1, h2{
+    padding-left: 10px;
+}
+
 
 /*==================== 
        NAV BAR 
@@ -214,15 +218,17 @@ transform: scale(1, 1);
     transition: width 0.4s 0.3s;
 }
 
-.HRZones {
+.description {
     font-size: 20px;
     font-family:Helvetica;
+      
 }
 
-.HRZones-Header{
+.generic_header{
     font-size: 35px;
     text-transform:uppercase;
     font-family:Helvetica;
+    
 }
 
 .chart-title.charts:hover::before {
@@ -242,12 +248,13 @@ transform: scale(1, 1);
 }
 
 
-.heart-icon{
-    position: relative;
-    display: block;
-    margin: auto;
+.units{
+    font-family: 'Helvetica';
+    font-size: 40px;
+    display:table;
+    padding-top:20px;
+    padding-left:inherit; 
 }
-
 
 .dc-select-menu {
     background: #fff;
@@ -262,7 +269,7 @@ transform: scale(1, 1);
     margin-top:11px;
     padding-top: 4px;
     padding-bottom: 0;
-    font-family:Helvetica;
+    font-family:'Helvetica';
 }
 
 /*==================== 
@@ -279,6 +286,11 @@ transform: scale(1, 1);
     animation:none;
 }
 
+.heart-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
 
 
 @media screen and (max-width: 768px) {
