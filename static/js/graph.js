@@ -1,3 +1,6 @@
+window.onload = function() {
+
+
 queue()
    .defer(d3.json, "/fitbit/activity")
    .await(makeGraphs);
@@ -12,14 +15,11 @@ function makeGraphs(error, activityJson) {
     var monthNameFormat = d3.time.format("%b");
     fitbitActivity.forEach(function (d) {
         d.date = dateFormat.parse(d.date);
-        d.month = d3.time.month(d.date);
         d.calories_burned = +d.calories_burned;
         d.steps = +d.steps;
         d.distance = +d.distance;
         d.floors = +d.floors;
-        // d["minutes_sedentary"] = +d["minutes_sedentary"];
         d.minutes_lightly_active = +d.minutes_lightly_active;
-        //d["minutes_fairly_active"] = +d["minutes_fairly_active"];
         d.minutes_very_active = +d.minutes_very_active;
         d.activity_calories = +d.activity_calories;
         d.value = +[d.value];
@@ -38,17 +38,22 @@ function makeGraphs(error, activityJson) {
     var monthDim=ndx.dimension(function(d) {
         var month = d.date.getMonth();
         var months= [null, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        return d.month;
+        if (typeof month !== 'undefined' && parseInt(month) > 0 && parseInt(month) < 13) {
+          return months[month];
+        }
+        return undefined;
     });
+
     var caloriesDim =ndx.dimension(function(d) {
         return d.calories_burned;
     });
     var stepsDim =ndx.dimension(function(d) {
-        return d.steps;
+        return d.stps;
     });
     var distanceDim =ndx.dimension(function(d) {
         return d.distance;
     });
+
     var floorsDim =ndx.dimension(function(d) {
         return d.floors;
     });
@@ -86,7 +91,7 @@ function makeGraphs(error, activityJson) {
    });
 
     var totalDistance = ndx.groupAll().reduceSum(function (d) {
-       return d.distance;
+      return d.distance;
    });
 
     var totalFloors = ndx.groupAll().reduceSum(function (d) {
@@ -137,9 +142,9 @@ function makeGraphs(error, activityJson) {
         .orient("left")
         .ticks(6);
 
-    selectField = dc.selectMenu('#menu-select')
-       .dimension(monthDim)
-       .group(monthGroup);
+     selectField = dc.selectMenu('#menu-select')
+        .dimension(monthDim)
+        .group(monthGroup);
 
    //Charts
    caloriesChart
@@ -211,7 +216,7 @@ function makeGraphs(error, activityJson) {
        .xAxis(xAxis);
 
     distanceND
-      .formatNumber(d3.format("d"))
+      .formatNumber(d3.format("f"))
       .valueAccessor(function (d){
         return d;
       })
@@ -246,3 +251,4 @@ function makeGraphs(error, activityJson) {
 
     dc.renderAll();
 }
+};
