@@ -1,6 +1,4 @@
 window.onload = function() {
-  
-
 queue()
    .defer(d3.json, "/fitbit/heart_rate")
    .await(makeGraphs);
