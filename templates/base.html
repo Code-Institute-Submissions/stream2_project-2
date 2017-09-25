@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %} Maisie's Health Data</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/keen-dashboards.css') }}">
     <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/dc.css') }}">
@@ -49,19 +48,22 @@
 {% endblock %}
 </div>
 
+
+
 <script src="{{ url_for ('static',filename='lib/js/jquery.min.js') }}"></script>
 <script src="{{ url_for ('static',filename='lib/js/bootstrap.min.js') }}"></script>
 <script src="{{ url_for ('static',filename='lib/js/crossfilter.js') }}"></script>
 <script src="{{ url_for ('static',filename='lib/js/d3.js') }}"></script>
 <script src="{{ url_for ('static',filename='lib/js/dc.js') }}"></script>
 <script src="{{ url_for ('static',filename='lib/js/queue.js') }}"></script>
-
-
 <script src="{{ url_for ('static',filename='lib/js/keen.min.js') }}"></script>
-<script src="{{ url_for ('static',filename='js/graph.js') }}" type='text/javascript'></script>
-<script src="{{ url_for ('static',filename='js/heart_rate_graph.js') }}" type='text/javascript'></script>
 <script src="{{ url_for ('static',filename='lib/js/intro.js') }}" type="text/javascript"></script>
 <script src="{{ url_for ('static',filename='js/nav.js') }}" type="text/javascript"></script>
+<script src="{{ url_for ('static',filename='js/heart_rate_graph.js') }}" type='text/javascript'></script>
+{% block tail_js %}
+    
+    
+{% endblock %}
 </body>
 </html>
 
