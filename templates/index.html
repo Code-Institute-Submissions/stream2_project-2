@@ -117,5 +117,8 @@
         <!-- Floor ND -->
        </div>
     </div>
-{% endblock %}
 
+{% endblock %}
+{% block tail_js %}
+    <script src="{{ url_for ('static',filename='js/graph.js') }}" type='text/javascript'></script>  
+{% endblock %}
