@@ -160,7 +160,7 @@ function makeGraphs(error, activityJson) {
        .xUnits(d3.time.days)
        .elasticY(true)
        .elasticX(true)
-       .xAxisLabel("May")
+       .xAxisLabel("2017")
        .yAxisLabel("Calories Burned Per Day")
        .yAxis(yAxis)
        .xAxis(xAxis);
@@ -185,7 +185,7 @@ function makeGraphs(error, activityJson) {
        .xUnits(d3.time.days)
        .elasticY(true)
        .elasticX(true)
-       .xAxisLabel("May")
+       .xAxisLabel("2017")
        .yAxisLabel("Steps Taken")
        .yAxis(yAxis)
        .xAxis(xAxis);
@@ -210,7 +210,7 @@ function makeGraphs(error, activityJson) {
        .xUnits(d3.time.days)
        .elasticY(true)
        .elasticX(true)
-       .xAxisLabel("May")
+       .xAxisLabel("2017")
        .yAxisLabel("Distance Travelled Per Day")
        .yAxis(yAxis)
        .xAxis(xAxis);
@@ -235,7 +235,7 @@ function makeGraphs(error, activityJson) {
        .xUnits(d3.time.days)
        .elasticY(true)
        .elasticX(true)
-       .xAxisLabel("May")
+       .xAxisLabel("2017")
        .yAxisLabel("Floors Climbed Per Day")
        .yAxis(yAxis)
        .xAxis(xAxis);
