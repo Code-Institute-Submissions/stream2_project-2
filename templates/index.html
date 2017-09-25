@@ -2,15 +2,16 @@
 {% block title %}Index{% endblock %}
 {% block content %}
 
-    <div id="outer" class="container-fluid">
 
     <div class="row">
-        <div class="col-sm-12 chart-wrapper">
+        <div class="col-sm-12">
+            <div class="chart-wrapper">
                     <div class="chart-title charts">Welcome</div>
                     <div>
-                   <p class="HRZones">Welcome to my Health Data page, here you can see data collected from my fitbit. You will find information from how many calories I've burnt, total steps I've taken and distance travelled. You can also find all my heart rate data on the next page. </p>
+                   <p class="description">Welcome to my Health Data page, here you can see data collected from my fitbit. You will find information from how many calories I've burnt, total steps I've taken and distance travelled. You can also find all my heart rate data on the next page. </p>
                    </div>
                 </div>
+            </div>
                 
         <!-- Calories Burned Chart -->
                 <div class="col-sm-8">
@@ -85,6 +86,7 @@
                         </div>
                         <div class="chart-stage">
                             <div id="distanceND"></div>
+                            <span class="units">km</span>
                         </div>
                     </div>
                 </div>
@@ -116,7 +118,7 @@
                 </div>
         <!-- Floor ND -->
        </div>
-    </div>
+
 
 {% endblock %}
 {% block tail_js %}

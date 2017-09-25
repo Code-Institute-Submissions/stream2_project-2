@@ -2,24 +2,25 @@
 {% block title %}Heart Rate{% endblock %}
 {% block content %}
 
-    <div id="outer" class="container-fluid">
 
         <div class="row">
 
         <!-- Heart Rate Zones-->
-                <div class="col-sm-9 chart-wrapper">
+                <div class="col-sm-9">
+                    <div class="chart-wrapper">
                     <div class="chart-title charts">Heart Rate Zone</div>
                     <div>
-                   <h2 class="HRZones-Header">Peak</h2>
-                   <p class="HRZones">Peak zone, which means your heart rate is greater than 85% of maximum, is the high-intensity exercise zone. The peak zone is for short intense sessions that improve performance and speed.</p>
+                   <h2 class="generic_header">Peak</h2>
+                   <p class="description">Peak zone, which means your heart rate is greater than 85% of maximum, is the high-intensity exercise zone. The peak zone is for short intense sessions that improve performance and speed.</p>
 
-                   <h2 class="HRZones-Header">Cardio</h2>
-                   <p class="HRZones">Cardio zone, which means your heart rate is 70 to 84% of maximum, is the medium-to-high intensity exercise zone. In this zone, you're pushing yourself but not straining. For most people, this is the exercise zone to target.</p>
+                   <h2 class="generic_header">Cardio</h2>
+                   <p class="description">Cardio zone, which means your heart rate is 70 to 84% of maximum, is the medium-to-high intensity exercise zone. In this zone, you're pushing yourself but not straining. For most people, this is the exercise zone to target.</p>
 
-                   <h2 class="HRZones-Header">Fat Burn</h2>
-                   <p class="HRZones">Fat burn zone, which means your heart rate is 50 to 69% of maximum, is the low-to-medium intensity exercise zone. It’s called the fat burn zone because a higher percentage of calories are burned from fat, but the total calorie burn rate is lower.</p>
+                   <h2 class="generic_header">Fat Burn</h2>
+                   <p class="description">Fat burn zone, which means your heart rate is 50 to 69% of maximum, is the low-to-medium intensity exercise zone. It’s called the fat burn zone because a higher percentage of calories are burned from fat, but the total calorie burn rate is lower.</p>
                    </div>
                 </div>
+            </div>
         <!-- Heart Rate Zones -->
 
         <!-- Average Resting Heart Rate  -->
@@ -80,5 +81,4 @@
                 </div>
         <!-- Heart Rate Calories -->
        </div>
-    </div>
 {% endblock %}
