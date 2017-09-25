@@ -257,19 +257,18 @@ transform: scale(1, 1);
 }
 
 .dc-select-menu {
-    background: #fff;
-    width: 30%;
-    border: none;
-    position: relative;
-    height: 31px;
-    font-size: 15px;
-    color: #000;
-    vertical-align: middle;
-    text-align: center;
-    margin-top:11px;
-    padding-top: 4px;
-    padding-bottom: 0;
-    font-family:'Helvetica';
+  border-radius: 3%;
+  font-size: 16px;
+  height: 40px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dc-select-menu:hover{
+  border: 1px solid #bcff25;
 }
 
 /*==================== 
@@ -312,9 +311,9 @@ transform: scale(1, 1);
 
         
 
-        .dc-select-menu{
+        /*.dc-select-menu{
             margin:5px;
-        }
+        }*/
     
     @media screen and (min-width: 768px) {
         #menu {
