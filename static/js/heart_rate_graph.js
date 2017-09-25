@@ -1,3 +1,6 @@
+window.onload = function() {
+  
+
 queue()
    .defer(d3.json, "/fitbit/heart_rate")
    .await(makeGraphs);
@@ -6,13 +9,13 @@ function makeGraphs(error, heart_rateJson) {
 
     //Clean projectsJson data
     var fitbit_heart_rate = heart_rateJson;
-    var dateFormat = d3.time.format("%d-%m-%Y");
+    var dateFormat = d3.time.format("%Y-%m-%d");
     var displayDate = d3.time.format("%d %b");
     var week = d3.time.format("%U");
-    var monthNameFormat = d3.time.format("%b");
+    //var monthNameFormat = d3.time.format("%b");
     fitbit_heart_rate.forEach(function (d) {
         d.date = dateFormat.parse(d.date);
-        d.month = d3.time.month(d.date);
+        //d.month = d3.time.month(d.date);
         d.resting_heart_rate = +d.resting_heart_rate;
         d.fat_burn_min_heart_rate = +d.fat_burn_min_heart_rate;
         d.fat_burn_max_heart_rate = +d.fat_burn_max_heart_rate;
@@ -40,8 +43,13 @@ function makeGraphs(error, heart_rateJson) {
     var monthDim=ndx.dimension(function(d) {
         var month = d.date.getMonth();
         var months= [null, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        return d.month;
+        if (typeof month !== 'undefined' && parseInt(month) > 0 && parseInt(month) < 13) {
+          return months[month];
+        }
+        return undefined;
     });
+
+
     var restingHRDim =ndx.dimension(function(d) {
         return d.resting_heart_rate;
       });
@@ -310,3 +318,4 @@ function makeGraphs(error, heart_rateJson) {
 
     dc.renderAll();
 }
+};
