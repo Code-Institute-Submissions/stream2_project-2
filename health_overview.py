@@ -107,43 +107,5 @@ def heart_rate_db():             ## should just be embedded in the app route abo
 
     
 
-@app.route("/sleep")
-def sleep():
-    return render_template("/sleep.html")
-
-@app.route("/fitbit/sleep_data")  
-def sleep_db():
-    
-    """
-    A Flask view to serve the project data from
-    MongoDB in JSON format
-    """
-
-    # A constant that define the record fields that we wish to retrieve
-    FIELDS = {
-        "_id": False,
-        "date": True,
-        "start_time": True,
-        "time_in_bed": True,
-        "minutes_aslepp": True,
-        "awakening_counts": True,
-        "minutes_awake": True,
-        "minutes_to_fall_asleep": False,
-        "minutes_after_wakeup": False,
-        "efficiency": True
-    }
-
-    # Open a connection to MongoDB using a with statement such that the
-    # connection will be closed as soon as we exit the with statement
-    # The MONGO_URI connection is required when hosted using a remote mongo db.
-    with MongoClient(MONGO_DB_URI) as conn:
-        # Define which collection we wish to access
-        collection = conn[MONGO_DB_NAME]['sleep_data']
-        # Retrieve a result set only with the fields defined in FIELDS
-        # and limit the the results to a lower limit of 20000
-        projects = collection.find(projection=FIELDS, limit=20000)
-        # Convert projects to a list in a JSON object and return the JSON data
-        return json.dumps(list(projects))
-
 if __name__ == '__main__':
     app.run(debug=True)
