@@ -23,11 +23,15 @@
                 <a class="link web-title navbar-brand" href="./">Maisie's Health Data<span data-letters="Maisie's Health Data"></span><span data-letters="Maisie's Health Data"></span></a>            
                 </div>
 <div id="menu-select"></div>
-            
-                <ul class="nav navbar-nav navbar-right nav-effect" id="navigation">
+                <div id="nav-toggle">
+                    <a class="toggle-link" href="#">&#9776;</a>
+                </div>
+                <div id="main-nav" class="inactive">
+                <ul class="nav navbar-nav navbar-right nav-effect" id="main-nav">
     				<li><a href="{{ url_for('index') }}"><span class="glyphicon glyphicon-home"></span></a></li>
                     <li><a href="{{ url_for('heart_rate') }}"><span class="glyphicon glyphicon-heart"></span></a></li>
 			    </ul>
+            </div>
         </div>
     </nav>
 
