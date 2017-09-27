@@ -22,8 +22,10 @@ p, h1, h2{
        NAV BAR 
 ======================*/
 
-#navbarBG {
-    background-color: black;
+.navbar {
+    width: 100%;
+    background-color: #000;
+    
 }
 
 .glyphicon{
@@ -137,6 +139,53 @@ p, h1, h2{
  100% {
 transform: scale(1, 1);
 }
+}
+
+ul {
+  
+  list-style: none;
+}
+li {
+  
+  
+}
+
+.toggle-link {
+  color:#000;
+  text-decoration:none;
+}
+
+.toggle-link:hover{
+    color:#bcff25;
+    text-decoration:none;
+}
+
+.toggle-link:active{
+  text-decoration:none;
+  color:#000;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+
+#nav-toggle {
+  width:1.4em;
+  display: block;
+  background:#ddd;
+  font-size:1.35em;
+  text-align: center;
+  overflow:hidden;
+  float:right;
+  border-radius:10%;
+  flex-direction:column;
+
+}
+#main-nav.inactive {
+  display: none;
+}
+#main-nav.active {
+  display:table;
 }
 
 
@@ -257,7 +306,7 @@ transform: scale(1, 1);
 }
 
 .dc-select-menu {
-  border-radius: 3%;
+  border-radius: 5%;
   font-size: 16px;
   height: 40px;
   margin-top: 5px;
@@ -300,58 +349,31 @@ transform: scale(1, 1);
 
 @media all and (max-width: 991px) {  }
 @media all and (max-width: 768px) { 
-    #menu {
-            display: none;
+    
+        .web-title{
+            height: inherit;
         }
+}   
+
+@media screen and (min-width: 768px) {
+
+        #nav-toggle {
+          display: none;
+        }
+        #main-nav.inactive {
+            display: block;
+        }
+}
+
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
 
         #outer{
-            margin-top: none;
+            padding-top: 80px;
         }
- }
-@media all and (max-width: 480px) { 
-    #menu {
-            width:1.4em;
-            display: block;
-            background:#ddd;
-            font-size:1.35em;
-            text-align: center;
-            overflow:hidden;
-            float:right;
-        }
-        #navigation.js {
-            display: none;
-        }
-        ul {
-            width:100%;
-        }
-        li {
-            width:100%;
-            border-right:none;
-        }
-        .web-title{height: inherit;}
-        } 
-    
-    @media screen and (min-width: 480px) {
-        #menu {
-            display: none;
-        }
-    }  
-        
+}
 
-        
-
-@media screen and (max-width: 768px) { }
-
-        
-        
-
-        
-
-        /*.dc-select-menu{
-            margin:5px;
-        }*/
-    
-   
 
 
 
