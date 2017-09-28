@@ -127,20 +127,20 @@ function makeGraphs(error, activityJson) {
     
 
     var margin = {top: 30, right: 50, bottom: 25, left: 30},
-        width = 700 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
+        width = 900,
+        height = 400;
 
     var x = d3.time.scale().range([0, width]);
     var y = d3.scale.linear().range([height, 0]);
 
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .orient("bottom")
-        .tickSize(6.0)
-        .tickFormat(d3.time.format("%d"));
-    var yAxis = d3.svg.axis().scale(y)
-        .orient("left")
-        .ticks(6);
+    // var xAxis = d3.svg.axis()
+    //     .scale(x)
+    //     .orient("bottom")
+    //     .tickSize(6.0)
+    //     .tickFormat(d3.time.format("%d"));
+    // var yAxis = d3.svg.axis().scale(y)
+    //     .orient("left")
+    //     .ticks(6);
 
      selectField = dc.selectMenu('#menu-select')
         .dimension(monthDim)
@@ -163,8 +163,7 @@ function makeGraphs(error, activityJson) {
        .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Calories Burned Per Day")
-       .yAxis(yAxis)
-       .xAxis(xAxis);
+       .yAxis().ticks(5);
 
     caloriesND
       .formatNumber(d3.format("d"))
@@ -188,8 +187,7 @@ function makeGraphs(error, activityJson) {
        .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Steps Taken")
-       .yAxis(yAxis)
-       .xAxis(xAxis);
+       .yAxis().ticks(5);
 
     stepsND
       .formatNumber(d3.format("d"))
@@ -213,8 +211,7 @@ function makeGraphs(error, activityJson) {
        .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Distance Travelled Per Day")
-       .yAxis(yAxis)
-       .xAxis(xAxis);
+       .yAxis().ticks(5);
 
     distanceND
       .formatNumber(d3.format("f"))
@@ -238,8 +235,7 @@ function makeGraphs(error, activityJson) {
        .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Floors Climbed Per Day")
-       .yAxis(yAxis)
-       .xAxis(xAxis);
+       .yAxis().ticks(5);
 
    floorND
       .formatNumber(d3.format("d"))
