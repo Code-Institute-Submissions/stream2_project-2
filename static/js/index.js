@@ -37,8 +37,8 @@ function makeGraphs(error, activityJson) {
 
     var monthDim=ndx.dimension(function(d) {
         var month = d.date.getMonth();
-        var months= [null, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        if (typeof month !== 'undefined' && parseInt(month) > 0 && parseInt(month) < 13) {
+        var months= [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        if (typeof month !== 'undefined' && parseInt(month) > 0 && parseInt(month) < 12) {
           return months[month];
         }
         return undefined;
@@ -144,7 +144,8 @@ function makeGraphs(error, activityJson) {
 
      selectField = dc.selectMenu('#menu-select')
         .dimension(monthDim)
-        .group(monthGroup);
+        .group(monthGroup)
+        .order();
 
    //Charts
    caloriesChart
