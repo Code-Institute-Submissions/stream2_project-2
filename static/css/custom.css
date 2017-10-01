@@ -193,6 +193,12 @@ li {
      CHART STYLING 
 ======================*/
 
+.chart-stage {
+  width:100%;
+}
+
+
+
 
 .axis path,
 .axis line {
