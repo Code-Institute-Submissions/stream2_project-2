@@ -1,6 +1,5 @@
 window.onload = function() {
 
-
 queue()
    .defer(d3.json, "/fitbit/activity")
    .await(makeGraphs);
@@ -34,7 +33,6 @@ function makeGraphs(error, activityJson) {
     var dateDim =ndx.dimension(function(d) {
         return d3.time.day(d.date);
     });
-
     var monthDim=ndx.dimension(function(d) {
         var month = d.date.getMonth();
         var months= [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -43,7 +41,6 @@ function makeGraphs(error, activityJson) {
         }
         return undefined;
     });
-
     var caloriesDim =ndx.dimension(function(d) {
         return d.calories_burned;
     });
@@ -53,21 +50,12 @@ function makeGraphs(error, activityJson) {
     var distanceDim =ndx.dimension(function(d) {
         return d.distance;
     });
-
     var floorsDim =ndx.dimension(function(d) {
         return d.floors;
     });
-    var minsLightlyActiveDim =ndx.dimension(function(d) {
-        return d.minutes_lightly_active;
-    });
-    var minsVeryActiveDim =ndx.dimension(function(d) {
-        return d.minutes_very_active;
-    });
-    var activityCaloriesDim =ndx.dimension(function(d) {
-        return d.activity_calories;
-    });
+    
 
-    // Define Data Groups, Calculate Metrics
+    // Define Data Groups
     var caloriesGroup = dateDim.group().reduceSum(function (d){
         return d.calories_burned;
     });
@@ -81,30 +69,18 @@ function makeGraphs(error, activityJson) {
         return d.floors;
     });
     var monthGroup = monthDim.group();
-
     var totalCalories = ndx.groupAll().reduceSum(function (d) {
        return d.calories_burned;
    });
-
     var totalSteps = ndx.groupAll().reduceSum(function (d) {
        return d.steps;
    });
-
     var totalDistance = ndx.groupAll().reduceSum(function (d) {
       return d.distance;
    });
-
     var totalFloors = ndx.groupAll().reduceSum(function (d) {
       return d.floors;
     });
-
-    
-
-    //var minsSedentaryGroup = minsSedentaryDim.group();
-    var minsLightlyActiveGroup = minsLightlyActiveDim.group();
-    //var minsFairlyActiveGroup = minsFairlyActiveDim.group();
-    var minsVeryActiveGroup = minsVeryActiveDim.group();
-    var activityCaloriesGroup = activityCaloriesDim.group();
     var all = ndx.groupAll();
 
     
@@ -115,7 +91,7 @@ function makeGraphs(error, activityJson) {
 
     
 
-    //Charts
+    // Define Charts
     var caloriesChart = dc.barChart("#calories-burned-chart");
     var caloriesND = dc.numberDisplay("#caloriesND");
     var stepsChart = dc.barChart("#steps-chart");
@@ -125,45 +101,41 @@ function makeGraphs(error, activityJson) {
     var floorChart = dc.barChart("#floor-chart");
     var floorND = dc.numberDisplay("#floorND");
     
+    
+    // Calculate dimensions for charts
+    var chartWidth = $("#main-chart").width();
+    var pieRadius = 200;
+    if(chartWidth >= 480){
+            pieRadius = 200;
+        } else {
+            pieRadius = chartWidth * 0.3;
+        }
+    var margin = {top: 30, right: 50, bottom: 25, left: 30};
 
-    var margin = {top: 30, right: 50, bottom: 25, left: 30},
-        width = 900,
-        height = 400;
-
-    var x = d3.time.scale().range([0, width]);
-    var y = d3.scale.linear().range([height, 0]);
-
-    // var xAxis = d3.svg.axis()
-    //     .scale(x)
-    //     .orient("bottom")
-    //     .tickSize(6.0)
-    //     .tickFormat(d3.time.format("%d"));
-    // var yAxis = d3.svg.axis().scale(y)
-    //     .orient("left")
-    //     .ticks(6);
+    // Month select menu - view data by month
 
      selectField = dc.selectMenu('#menu-select')
         .dimension(monthDim)
         .group(monthGroup)
         .order();
 
-   //Charts
+   //Charts and Number Displays
    caloriesChart
-       .width(width)
-       .height(height)
+       .width(chartWidth)
+       .height(400)
        .margins(margin)
        .dimension(dateDim)
        .group(caloriesGroup)
        .transitionDuration(5000)
-       .brushOn(false)
+       // .brushOn(false)
        .title(function(d){return d.value + " kcal";})
        .x(d3.time.scale().domain([minDate, maxDate]))
        .xUnits(d3.time.days)
-       .elasticY(true)
-       .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Calories Burned Per Day")
-       .yAxis().ticks(5);
+       .elasticY(true)
+       // .elasticX(true)
+       .xAxis().ticks(10);
 
     caloriesND
       .formatNumber(d3.format("d"))
@@ -173,21 +145,21 @@ function makeGraphs(error, activityJson) {
       .group(totalCalories);
 
     stepsChart
-       .width(width)
-       .height(height)
+       .width(chartWidth)
+       .height(400)
        .margins(margin)
        .dimension(dateDim)
        .group(numberOfStepsTaken)
        .transitionDuration(5000)
-       .brushOn(false)
+       // .brushOn(false)
        .title(function(d){return d.value + " kcal";})
        .x(d3.time.scale().domain([minDate, maxDate]))
        .xUnits(d3.time.days)
        .elasticY(true)
-       .elasticX(true)
+       // .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Steps Taken")
-       .yAxis().ticks(5);
+       .xAxis().ticks(10);
 
     stepsND
       .formatNumber(d3.format("d"))
@@ -197,21 +169,21 @@ function makeGraphs(error, activityJson) {
       .group(totalSteps);
 
     distanceChart
-       .width(width)
-       .height(height)
+       .width(chartWidth)
+       .height(400)
        .margins(margin)
        .dimension(dateDim)
        .group(distanceTravelled)
        .transitionDuration(5000)
-       .brushOn(false)
+       // .brushOn(false)
        .title(function(d){return d.value + " km";})
        .x(d3.time.scale().domain([minDate, maxDate]))
        .xUnits(d3.time.days)
        .elasticY(true)
-       .elasticX(true)
+       // .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Distance Travelled Per Day")
-       .yAxis().ticks(5);
+       .xAxis().ticks(10);
 
     distanceND
       .formatNumber(d3.format("f"))
@@ -221,21 +193,21 @@ function makeGraphs(error, activityJson) {
       .group(totalDistance);
 
    floorChart
-       .width(width)
-       .height(height)
+       .width(chartWidth)
+       .height(400)
        .margins(margin)
        .dimension(floorsDim)
        .group(floorsGroup)
        .transitionDuration(5000)
-       .brushOn(false)
+       // .brushOn(false)
        .title(function(d){return d.value + " floors";})
        .x(d3.time.scale().domain([minDate, maxDate]))
        .xUnits(d3.time.days)
-       .elasticY(true)
+        // .elasticY(true)
        .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Floors Climbed Per Day")
-       .yAxis().ticks(5);
+       .xAxis().ticks(10);
 
    floorND
       .formatNumber(d3.format("d"))
@@ -244,8 +216,39 @@ function makeGraphs(error, activityJson) {
       })
       .group(totalFloors);
 
-  
 
+    // Make charts responsive
+    $(window).resize(function() {
+        // Recalculate chart size
+        chartWidth = $("#main-chart").width();
+        if(chartWidth >= 480){
+            pieRadius = 200;
+        } else {
+            pieRadius = chartWidth * 0.3;
+        }
+
+    // Set new values and redraw charts
+        caloriesChart
+            .width(chartWidth)
+            .rescale()
+            .redraw();
+
+        stepsChart
+            .width(chartWidth)
+            .rescale()
+            .redraw();
+
+        distanceChart
+            .width(chartWidth)
+            .rescale()
+            .redraw();
+
+        floorChart
+            .width(chartWidth)
+            .rescale()
+            .redraw();   
+});
+    // Render everything on page
     dc.renderAll();
-}
+  }
 };
