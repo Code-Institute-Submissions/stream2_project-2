@@ -10,10 +10,8 @@ function makeGraphs(error, heart_rateJson) {
     var dateFormat = d3.time.format("%Y-%m-%d");
     var displayDate = d3.time.format("%d %b");
     var week = d3.time.format("%U");
-    //var monthNameFormat = d3.time.format("%b");
     fitbit_heart_rate.forEach(function (d) {
         d.date = dateFormat.parse(d.date);
-        //d.month = d3.time.month(d.date);
         d.resting_heart_rate = +d.resting_heart_rate;
         d.fat_burn_min_heart_rate = +d.fat_burn_min_heart_rate;
         d.fat_burn_max_heart_rate = +d.fat_burn_max_heart_rate;
@@ -27,8 +25,7 @@ function makeGraphs(error, heart_rateJson) {
         d.peak_max_heart_rate = +d.peak_max_heart_rate;
         d.peak_calories_burned= +d.peak_calories_burned;
         d.peak_minutes = +d.peak_minutes;
-        // FILL OUT RELEVANT LINES
-        d.value = +[d.value];
+        d.value = +d.value;
     });
 
     //Create a Crossfilter instance
@@ -46,12 +43,9 @@ function makeGraphs(error, heart_rateJson) {
         }
         return undefined;
     });
-
-
     var restingHRDim =ndx.dimension(function(d) {
         return d.resting_heart_rate;
       });
-
     var fatburnMinHRDim =ndx.dimension(function(d) {
         return d.fat_burn_min_heart_rate;
         });
@@ -64,7 +58,6 @@ function makeGraphs(error, heart_rateJson) {
     var fatburnMinsDim =ndx.dimension(function(d) {
         return d.fat_burn_minutes;
         });
-
     var cardioMinHRDim =ndx.dimension(function(d) {
         return d.cardio_min_heart_rate;
         });
@@ -77,7 +70,6 @@ function makeGraphs(error, heart_rateJson) {
     var cardioMinsDim =ndx.dimension(function(d) {
         return d.cardio_minutes;
         });
-
     var peakMinHRDim =ndx.dimension(function(d) {
         return d.peak_min_heart_rate;
         });
@@ -90,9 +82,6 @@ function makeGraphs(error, heart_rateJson) {
     var peakMinsDim =ndx.dimension(function(d) {
         return d.peak_minutes;
         });
-
-
-
 
     // Define Data Groups, Calculate Metrics
     
@@ -141,11 +130,7 @@ function makeGraphs(error, heart_rateJson) {
       return avg;
     };
 
-
-
-
-
-
+    // Define Data Groups
     var fatburMinHRGroup = dateDim.group().reduceSum(function (d){
         return d.fat_burn_min_heart_rate;
     });
@@ -159,8 +144,6 @@ function makeGraphs(error, heart_rateJson) {
         return d.fat_burn_minutes;
     });
 
-
-
     var cardioMinHRGroup = dateDim.group().reduceSum(function (d){
         return d.cardio_min_heart_rate;
     });
@@ -173,24 +156,18 @@ function makeGraphs(error, heart_rateJson) {
     var cardioMinsGroup = dateDim.group().reduceSum(function (d){
         return d.cardio_minutes;
     });
-
-
-
     var peakMinHRGroup = dateDim.group().reduceSum(function (d){
         return d.peak_min_heart_rate;
     });
     var peakMaxHRGroup = dateDim.group().reduceSum(function (d){
         return d.peak_max_heart_rate;
     });
-
     var peakCalsGroup = dateDim.group().reduceSum(function (d){
         return d.peak_calories_burned;
     });
-
     var peakMinsGroup = dateDim.group().reduceSum(function (d){
         return d.peak_minutes;
     });
-
     var monthGroup = monthDim.group();
 
     var all = ndx.groupAll();
@@ -201,7 +178,7 @@ function makeGraphs(error, heart_rateJson) {
     var maxDate = dateDim.top(1)[0].date;
 
 
-    //Charts
+    //DefineCharts
     var avgRestingHR_ND = dc.numberDisplay("#average-resting-hr");
     var maxHeartRateChart = dc.lineChart("#max-heart-rate");
     var heartRateCalsBurnedChart = dc.lineChart("#heart-rate-cals");

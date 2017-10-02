@@ -21,7 +21,7 @@ function makeGraphs(error, activityJson) {
         d.minutes_lightly_active = +d.minutes_lightly_active;
         d.minutes_very_active = +d.minutes_very_active;
         d.activity_calories = +d.activity_calories;
-        d.value = +[d.value];
+        d.value = +d.value;
 
     });
 
