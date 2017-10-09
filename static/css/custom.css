@@ -361,6 +361,7 @@ li {
         }
 }   
 
+/* Portrait tablets and small desktops */
 @media screen and (min-width: 768px) {
 
         #nav-toggle {
@@ -371,12 +372,19 @@ li {
         }
 }
 
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+#outer{
+            padding-top: 100px;
+        }
+}
+
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
 
         #outer{
-            padding-top: 80px;
+            padding-top: 100px;
         }
 }
 
