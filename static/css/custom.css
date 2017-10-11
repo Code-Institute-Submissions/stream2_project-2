@@ -17,6 +17,14 @@ p, h1, h2{
     padding: 10px;
 }
 
+a{
+  color:#000;
+  text-decoration:underline;
+}
+
+a:hover{
+  background-color:#bcff25;
+}
 
 /*==================== 
        NAV BAR 
@@ -198,8 +206,6 @@ li {
 }
 
 
-
-
 .axis path,
 .axis line {
   fill: black;
@@ -224,6 +230,10 @@ li {
   fill: black;
   font-size: 15px;
   font-family:"Helvetica";
+}
+
+.slice-label {
+    cursor: pointer;
 }
 
 .chart-title.charts{
@@ -379,8 +389,14 @@ li {
 
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
-#outer{
+        #outer{
             padding-top: 100px;
+        }
+
+        .dc-chart text.pie-slice {
+            fill: black;
+            font-size: 10px;
+            font-family:"Helvetica";
         }
 }
 
@@ -390,6 +406,11 @@ li {
 
         #outer{
             padding-top: 100px;
+        }
+        .dc-chart text.pie-slice {
+            fill: black;
+            font-size: 10px;
+            font-family:"Helvetica";
         }
 }
 
