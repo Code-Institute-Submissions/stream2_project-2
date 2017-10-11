@@ -4,14 +4,26 @@
 
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <div class="chart-wrapper">
                     <div class="chart-title charts">Welcome</div>
                     <div>
-                   <p class="description">Welcome to my Health Data page, here you can see data collected from my fitbit. You will find information from how many calories I've burnt, total steps I've taken and distance travelled. You can also find all my heart rate data on the next page. </p>
+                   <p class="description">Welcome to my Health Data page, here you can see data collected from my fitbit since April 2017. You will find information from how many calories I've burnt, total steps I've taken and distance travelled. You can also find all my heart rate data on the <a href="{{ url_for('heart_rate') }}">next page</a>. You can also select to view each month in the select bar at the top. </p>
                    </div>
                 </div>
             </div>
+
+        <!-- Month Pie  -->
+            <div class="col-sm-6">
+                  <div class="chart-container">
+                    <div class="chart-wrapper">
+                        <div class="chart-stage">
+                            <div id="month-pie"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- Calories Burned Chart -->
                 
         <!-- Calories Burned Chart -->
             <div class="col-sm-8">
