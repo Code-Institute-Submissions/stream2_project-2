@@ -22,6 +22,7 @@ function makeGraphs(error, activityJson) {
         d.minutes_very_active = +d.minutes_very_active;
         d.activity_calories = +d.activity_calories;
         d.value = +d.value;
+        d.month = d.date.getMonth();
 
     });
 
@@ -35,12 +36,17 @@ function makeGraphs(error, activityJson) {
     });
     var monthDim=ndx.dimension(function(d) {
         var month = d.date.getMonth();
-        var months= [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        if (typeof month !== 'undefined' && parseInt(month) > 0 && parseInt(month) < 12) {
+        var months= [ 'January-2017', 'February-2017', 'March-2017', 'April-2017', 'May-2017', 'June-2017', 'July-2017', 'August-2017', 'September-2017', 'October-2017', 'November-2017', 'December-2017'];
+        months.sort(function(dateA, dateB) {
+          return new Date(dateA) - new Date(dateB);
+        });
+        if (typeof month !== 'undefined' && parseInt(month) > 0 && parseInt(month) < 13) {
           return months[month];
         }
         return undefined;
     });
+
+
     var caloriesDim =ndx.dimension(function(d) {
         return d.calories_burned;
     });
@@ -69,6 +75,7 @@ function makeGraphs(error, activityJson) {
         return d.floors;
     });
     var monthGroup = monthDim.group();
+    
     var totalCalories = ndx.groupAll().reduceSum(function (d) {
        return d.calories_burned;
    });
@@ -100,15 +107,16 @@ function makeGraphs(error, activityJson) {
     var distanceND = dc.numberDisplay("#distanceND");
     var floorChart = dc.barChart("#floor-chart");
     var floorND = dc.numberDisplay("#floorND");
+    var monthPie = dc.pieChart("#month-pie");
     
     
     // Calculate dimensions for charts
     var chartWidth = $("#main-chart").width();
-    var pieRadius = 200;
+    var chartSize = 200;
     if(chartWidth >= 480){
-            pieRadius = 200;
+            chartSize = 200;
         } else {
-            pieRadius = chartWidth * 0.3;
+            chartSize = chartWidth * 0.3;
         }
     var margin = {top: 30, right: 50, bottom: 25, left: 30};
 
@@ -120,14 +128,26 @@ function makeGraphs(error, activityJson) {
         .order();
 
    //Charts and Number Displays
+
+   monthPie
+       .height(400)
+       .width(chartWidth)
+       .radius(chartSize)
+       .transitionDuration(1500)
+       .colors(d3.scale.ordinal().range(['#BCFF25','#ABE822','#9AD11F','#89BA1B','#78A318','#678C15','#567411','#455D0E','#34460B']))
+       .dimension(monthDim)
+       .group(monthGroup);
+       
+
+
    caloriesChart
        .width(chartWidth)
        .height(400)
        .margins(margin)
        .dimension(dateDim)
        .group(caloriesGroup)
-       .transitionDuration(5000)
-       // .brushOn(false)
+       .transitionDuration(2000)
+       .brushOn(false)
        .title(function(d){return d.value + " kcal";})
        .x(d3.time.scale().domain([minDate, maxDate]))
        .xUnits(d3.time.days)
@@ -150,8 +170,8 @@ function makeGraphs(error, activityJson) {
        .margins(margin)
        .dimension(dateDim)
        .group(numberOfStepsTaken)
-       .transitionDuration(5000)
-       // .brushOn(false)
+       .transitionDuration(2000)
+       .brushOn(false)
        .title(function(d){return d.value + " kcal";})
        .x(d3.time.scale().domain([minDate, maxDate]))
        .xUnits(d3.time.days)
@@ -175,7 +195,7 @@ function makeGraphs(error, activityJson) {
        .dimension(dateDim)
        .group(distanceTravelled)
        .transitionDuration(5000)
-       // .brushOn(false)
+       .brushOn(false)
        .title(function(d){return d.value + " km";})
        .x(d3.time.scale().domain([minDate, maxDate]))
        .xUnits(d3.time.days)
@@ -199,7 +219,7 @@ function makeGraphs(error, activityJson) {
        .dimension(floorsDim)
        .group(floorsGroup)
        .transitionDuration(5000)
-       // .brushOn(false)
+       .brushOn(false)
        .title(function(d){return d.value + " floors";})
        .x(d3.time.scale().domain([minDate, maxDate]))
        .xUnits(d3.time.days)
@@ -209,12 +229,12 @@ function makeGraphs(error, activityJson) {
        .yAxisLabel("Floors Climbed Per Day")
        .xAxis().ticks(10);
 
-   floorND
-      .formatNumber(d3.format("d"))
-      .valueAccessor(function (d){
-        return d;
-      })
-      .group(totalFloors);
+    floorND
+       .formatNumber(d3.format("d"))
+       .valueAccessor(function (d){
+          return d;
+        })
+       .group(totalFloors);
 
 
     // Make charts responsive
@@ -228,6 +248,12 @@ function makeGraphs(error, activityJson) {
         }
 
     // Set new values and redraw charts
+        monthPie
+            .width(chartWidth)
+            .radius(chartSize)
+            .rescale()
+            .redraw();
+
         caloriesChart
             .width(chartWidth)
             .rescale()
