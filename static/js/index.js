@@ -120,6 +120,17 @@ function makeGraphs(error, activityJson) {
         }
     var margin = {top: 30, right: 50, bottom: 25, left: 30};
 
+    var x = d3.time.scale().range([0]);
+    var y = d3.scale.linear().range([0]);
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickSize(6.0)
+        .tickFormat(d3.time.format("%d"));
+    var yAxis = d3.svg.axis().scale(y)
+        .orient("left")
+        .ticks(8);
+
     // Month select menu - view data by month
 
      selectField = dc.selectMenu('#menu-select')
@@ -154,8 +165,9 @@ function makeGraphs(error, activityJson) {
        .xAxisLabel("2017")
        .yAxisLabel("Calories Burned Per Day")
        .elasticY(true)
-       // .elasticX(true)
-       .xAxis().ticks(10);
+       .elasticX(true)
+       .yAxis(yAxis)
+       .xAxis(xAxis);
 
     caloriesND
       .formatNumber(d3.format("d"))
@@ -179,7 +191,8 @@ function makeGraphs(error, activityJson) {
        // .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Steps Taken")
-       .xAxis().ticks(10);
+       .yAxis(yAxis)
+       .xAxis(xAxis);
 
     stepsND
       .formatNumber(d3.format("d"))
@@ -203,7 +216,8 @@ function makeGraphs(error, activityJson) {
        // .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Distance Travelled Per Day")
-       .xAxis().ticks(10);
+       .yAxis(yAxis)
+       .xAxis(xAxis);
 
     distanceND
       .formatNumber(d3.format("f"))
@@ -227,7 +241,8 @@ function makeGraphs(error, activityJson) {
        .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Floors Climbed Per Day")
-       .xAxis().ticks(10);
+       .yAxis(yAxis)
+       .xAxis(xAxis);
 
     floorND
        .formatNumber(d3.format("d"))
@@ -242,16 +257,16 @@ function makeGraphs(error, activityJson) {
         // Recalculate chart size
         chartWidth = $("#main-chart").width();
         if(chartWidth >= 480){
-            pieRadius = 200;
+            chartSize = 200;
         } else {
-            pieRadius = chartWidth * 0.3;
+            chartSize = chartWidth * 0.3;
         }
 
     // Set new values and redraw charts
         monthPie
             .width(chartWidth)
             .radius(chartSize)
-            .rescale()
+            
             .redraw();
 
         caloriesChart
