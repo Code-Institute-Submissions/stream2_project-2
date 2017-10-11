@@ -14,7 +14,7 @@ html, body {
 }
 
 p, h1, h2{
-    padding-left: 10px;
+    padding: 10px;
 }
 
 
@@ -220,6 +220,11 @@ li {
   display: none;
 }
 
+.dc-chart text.pie-slice {
+  fill: black;
+  font-size: 15px;
+  font-family:"Helvetica";
+}
 
 .chart-title.charts{
     font-family:"Helvetica";
