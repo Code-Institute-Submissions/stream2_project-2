@@ -119,6 +119,7 @@ function makeGraphs(error, activityJson) {
             chartSize = chartWidth * 0.3;
         }
     var margin = {top: 30, right: 50, bottom: 25, left: 30};
+    var height = 400;
 
     var x = d3.time.scale().range([0]);
     var y = d3.scale.linear().range([0]);
@@ -139,11 +140,11 @@ function makeGraphs(error, activityJson) {
         .order();
 
    //Charts and Number Displays
-
    monthPie
-       .height(400)
        .width(chartWidth)
+       .height(height)
        .radius(chartSize)
+       .cx(400)
        .transitionDuration(1500)
        .colors(d3.scale.ordinal().range(['#BCFF25','#ABE822','#9AD11F','#89BA1B','#78A318','#678C15','#567411','#455D0E','#34460B']))
        .dimension(monthDim)
@@ -153,7 +154,7 @@ function makeGraphs(error, activityJson) {
 
    caloriesChart
        .width(chartWidth)
-       .height(400)
+       .height(height)
        .margins(margin)
        .dimension(dateDim)
        .group(caloriesGroup)
@@ -178,7 +179,7 @@ function makeGraphs(error, activityJson) {
 
     stepsChart
        .width(chartWidth)
-       .height(400)
+       .height(height)
        .margins(margin)
        .dimension(dateDim)
        .group(numberOfStepsTaken)
@@ -203,7 +204,7 @@ function makeGraphs(error, activityJson) {
 
     distanceChart
        .width(chartWidth)
-       .height(400)
+       .height(height)
        .margins(margin)
        .dimension(dateDim)
        .group(distanceTravelled)
@@ -228,7 +229,7 @@ function makeGraphs(error, activityJson) {
 
    floorChart
        .width(chartWidth)
-       .height(400)
+       .height(height)
        .margins(margin)
        .dimension(floorsDim)
        .group(floorsGroup)
@@ -266,7 +267,6 @@ function makeGraphs(error, activityJson) {
         monthPie
             .width(chartWidth)
             .radius(chartSize)
-            
             .redraw();
 
         caloriesChart
