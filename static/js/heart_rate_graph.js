@@ -37,8 +37,11 @@ function makeGraphs(error, heart_rateJson) {
     });
     var monthDim=ndx.dimension(function(d) {
         var month = d.date.getMonth();
-        var months= ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        if (typeof month !== 'undefined' && parseInt(month) > 0 && parseInt(month) < 12) {
+        var months= [ 'January-2017', 'February-2017', 'March-2017', 'April-2017', 'May-2017', 'June-2017', 'July-2017', 'August-2017', 'September-2017', 'October-2017', 'November-2017', 'December-2017'];
+        months.sort(function(dateA, dateB) {
+          return new Date(dateA) - new Date(dateB);
+        });
+        if (typeof month !== 'undefined' && parseInt(month) > 0 && parseInt(month) < 13) {
           return months[month];
         }
         return undefined;
@@ -179,22 +182,29 @@ function makeGraphs(error, heart_rateJson) {
 
 
     //DefineCharts
+    var monthPie = dc.pieChart("#month-pie");
     var avgRestingHR_ND = dc.numberDisplay("#average-resting-hr");
     var maxHeartRateChart = dc.lineChart("#max-heart-rate");
     var heartRateCalsBurnedChart = dc.lineChart("#heart-rate-cals");
     var minsInHRZonesChart = dc.lineChart("#mins-in-heart-rate");
     
 
-    var margin = {top: 30, right: 170, bottom: 25, left: 30},
-        width = 700 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
+    var chartWidth = $("#main-chart1").width();
+    var chartSize = 200;
+    if(chartWidth >= 480){
+            chartSize = 200;
+        } else {
+            chartSize = chartWidth * 0.3;
+        }
+    var margin = {top: 30, right: 200, bottom: 25, left: 30};
+    var height = 400;
 
-    var x = d3.time.scale().range([0, width]);
-    var y = d3.scale.linear().range([height, 0]);
+    var x = d3.time.scale().range([0]);
+    var y = d3.scale.linear().range([0]);
 
     var xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottomß")
+        .orient("bottom")
         .tickSize(6.0)
         .tickFormat(d3.time.format("%d"));
     var yAxis = d3.svg.axis().scale(y)
@@ -207,13 +217,23 @@ function makeGraphs(error, heart_rateJson) {
        .dimension(monthDim)
        .group(monthGroup);
 
+    monthPie
+       .width(chartWidth)
+       .height(height)
+       .radius(chartSize)
+       .cx(250)
+       .transitionDuration(1500)
+       .colors(d3.scale.ordinal().range(['#BCFF25','#ABE822','#9AD11F','#89BA1B','#78A318','#678C15','#567411','#455D0E','#34460B']))
+       .dimension(monthDim)
+       .group(monthGroup);
+
    avgRestingHR_ND
       .formatNumber(d3.format(".3g"))
       .valueAccessor(restingHRAVG)
       .group(restingHRTotals);
 
    maxHeartRateChart 
-       .width(700)
+       .width(chartWidth)
        .height(height)
        .margins(margin)
        .dimension(dateDim)
@@ -230,16 +250,17 @@ function makeGraphs(error, heart_rateJson) {
        .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Heart Rate")
+       .ordinalColors(['#BCFF25','#9AD11F','#78A318'])
        .legend(dc.legend()
-          .x(550)
-          .y(-2)
+          .x(800)
+          .y(30)
           .itemHeight(13)
           .gap(5))
        .yAxis(yAxis)
        .xAxis(xAxis);
 
     heartRateCalsBurnedChart
-       .width(700)
+       .width(chartWidth)
        .height(height)
        .margins(margin)
        .dimension(dateDim)
@@ -256,16 +277,17 @@ function makeGraphs(error, heart_rateJson) {
        .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Calories Burned")
+       .ordinalColors(['#BCFF25','#9AD11F','#78A318'])
        .legend(dc.legend()
-          .x(550)
-          .y(-2)
+          .x(800)
+          .y(30)
           .itemHeight(13)
           .gap(5))
        .yAxis(yAxis)
        .xAxis(xAxis);
 
     minsInHRZonesChart
-       .width(700)
+       .width(chartWidth)
        .height(height)
        .margins(margin)
        .dimension(dateDim)
@@ -282,15 +304,50 @@ function makeGraphs(error, heart_rateJson) {
        .elasticX(true)
        .xAxisLabel("2017")
        .yAxisLabel("Minutes Spent In Heart Rate Zone")
+       .ordinalColors(['#BCFF25','#9AD11F','#78A318'])
        .legend(dc.legend()
-          .x(550)
-          .y(-2)
+          .x(800)
+          .y(30)
           .itemHeight(13)
           .gap(5))
        .yAxis(yAxis)
        .xAxis(xAxis);
 
+    // Make charts responsive
+    $(window).resize(function() {
+        // Recalculate chart size
+        chartWidth = $("#main-chart1").width();
+        if(chartWidth >= 480){
+            chartSize = 200;
+        } else {
+            chartSize = chartWidth * 0.3;
+        }
 
+    // Set new values and redraw charts
+        monthPie
+            .width(chartWidth)
+            .radius(chartSize)
+            .redraw();
+
+        maxHeartRateChart 
+            .width(chartWidth)
+            .rescale()
+            .redraw();
+
+        heartRateCalsBurnedChart
+            .width(chartWidth)
+            .rescale()
+            .redraw();
+       
+
+        minsInHRZonesChart
+            .width(chartWidth)
+            .rescale()
+            .redraw();
+       
+
+});
+    // Render everything on page
     dc.renderAll();
-}
+  }
 };
