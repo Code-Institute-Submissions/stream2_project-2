@@ -4,7 +4,23 @@
 
 This is a data based website for my personal Health data taken from a fitbit activity tracker. Data includes calories burned, steps, distance, floors and heart rate data. 
 
+### What does it do?
+
+This website is made to show my health data in a visual way and allow you to compare and filter through the data by month.
+
+### How does it work
+- This websites uses **Flask** to route through the website. 
+- **Bootstrap** has been used as basis for styling. 
+- Charts created using **D3**, **DC** and **Crossfilter** 
+- All the data for the website is stored in **MongoDB**. The data was exported from my fitbit.
+
+### Features Left to Implement
+- Order months
+
+
 #Features
+Home
+- Month select Pie Chart
 - Calories burned chart 
 - Total calories burned
 - Steps chart 
@@ -13,13 +29,17 @@ This is a data based website for my personal Health data taken from a fitbit act
 - Total distance
 - Floors climbed chart
 - Total floors climbed
+
+Heart Data 
+- Month select Pie Chart
 - Average heart rate
 - Max Heart Rate
 - Calories Burned In Heart Rate Zones
 - Minutes In Heart Rate Zones
 
 
-## Tech Used 
+## Tech Used
+### Some the tech used includes:
 -[Python](https://www.python.org/)
 	- **Pyton** lets you work quickly
 	and integrate systems more effectively
@@ -33,20 +53,15 @@ This is a data based website for my personal Health data taken from a fitbit act
 	- **d3.js** JavaScript library for manipulating documents based on data. D3 helps bring data to life.
 -[dc.js](https://dc-js.github.io/dc.js/)
 	- **dc.js** Javascript charting library with native crossfilter support, allowing highly efficient exploration on large multi-dimensional datasets.
+- [MongoDB](https://www.mongodb.com)
+    - Used to store information
+- [PyMongo](https://api.mongodb.com/python/current/)
+    - Used to allow interaction between **Python** and **MongoDB**
 
 
-## Usage
-### Getting the code up and running
-1. Firstly you will need to clone this repository by running the ``` git clone <project's Gitbub URL> ``` command
-2. After you've done this you will need to install virtualenv if you haven't already got it installed. Run ``` [sudo] pip install virtualenv ``` in commandline
-3. Once you have done this create a virtual env and activate it. **Mac OS X** run ```  source bin/activate```
-4. Next make sure you are in the project root folder and run the ``` pip install -r requirements.txt ``` this will install all the requirements for the project. 
-5. To run the project on local server run 
-``` python health_overview.py```
+## Database
+- I exported data for each category and each month as a .csv file, I then uploaded each file into its corresponding collection via MongoDB.
 
-##Contributing
-1. Fork it!
-2. Create your feature branch: ``` git checkout -b my-new-feature ```
-Commit your changes:  ``` git commit -am 'Add some feature' ```
-Push to the branch: ``` git push origin my-new-feature ```
-Submit a pull request :)
+## Testing
+- Site was tested extensively using Chrome, Firefox, Opera and Edge. Was also tested using different web broswers on ipad, iphone and on an android phone.
+- Site responsiveness was tested on all platforms by resizing the browser window and using Chrome developer tools.
