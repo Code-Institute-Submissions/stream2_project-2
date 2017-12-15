@@ -67,3 +67,6 @@ Heart Data
 ## Testing
 - Site was tested extensively using Chrome, Firefox, Opera and Edge. Was also tested using different web broswers on ipad, iphone and on an android phone.
 - Site responsiveness was tested on all platforms by resizing the browser window and using Chrome developer tools.
+
+## Credits 
+- adapted the Kukuri [Text Hover Effect](https://tympanus.net/Development/TextStylesHoverEffects/) for my headings. 
